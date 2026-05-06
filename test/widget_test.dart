@@ -1,7 +1,9 @@
 import 'dart:collection';
 
 import 'package:flutter_test/flutter_test.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:theuniversedecides/main.dart';
+import 'package:theuniversedecides/services/random_org_service.dart';
 
 void main() {
   testWidgets('coin screen uses the random service', (WidgetTester tester) async {
@@ -10,10 +12,11 @@ void main() {
     ]);
 
     await tester.pumpWidget(
-      MyApp(
+      ProviderScope(
         overrides: [
           randomOrgServiceProvider.overrideWith((ref) => service),
         ],
+        child: const UniverseDecidesApp(),
       ),
     );
     await tester.tap(find.text('Lançar a moeda'));
@@ -31,10 +34,11 @@ void main() {
     ]);
 
     await tester.pumpWidget(
-      MyApp(
+      ProviderScope(
         overrides: [
           randomOrgServiceProvider.overrideWith((ref) => service),
         ],
+        child: const UniverseDecidesApp(),
       ),
     );
     await tester.tap(find.text('Dados'));
@@ -56,10 +60,11 @@ void main() {
     ]);
 
     await tester.pumpWidget(
-      MyApp(
+      ProviderScope(
         overrides: [
           randomOrgServiceProvider.overrideWith((ref) => service),
         ],
+        child: const UniverseDecidesApp(),
       ),
     );
     await tester.tap(find.text('Listas'));
