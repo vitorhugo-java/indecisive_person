@@ -1,4 +1,4 @@
-# indecisive_person
+# The Universe Decides 🌌
 
 The Universe Decides is a polished Flutter shell for an indecisive-person utility app. This phase focuses on release preparation by replacing the default starter screen with a branded overview and by tightening the native app setup for store submission.
 
