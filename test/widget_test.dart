@@ -9,7 +9,13 @@ void main() {
       [1],
     ]);
 
-    await tester.pumpWidget(MyApp(randomOrgService: service));
+    await tester.pumpWidget(
+      MyApp(
+        overrides: [
+          randomOrgServiceProvider.overrideWith((ref) => service),
+        ],
+      ),
+    );
     await tester.tap(find.text('Lançar a moeda'));
     await tester.pumpAndSettle();
 
@@ -24,7 +30,13 @@ void main() {
       [2, 3],
     ]);
 
-    await tester.pumpWidget(MyApp(randomOrgService: service));
+    await tester.pumpWidget(
+      MyApp(
+        overrides: [
+          randomOrgServiceProvider.overrideWith((ref) => service),
+        ],
+      ),
+    );
     await tester.tap(find.text('Dados'));
     await tester.pumpAndSettle();
     await tester.tap(find.text('2'));
@@ -43,7 +55,13 @@ void main() {
       [1],
     ]);
 
-    await tester.pumpWidget(MyApp(randomOrgService: service));
+    await tester.pumpWidget(
+      MyApp(
+        overrides: [
+          randomOrgServiceProvider.overrideWith((ref) => service),
+        ],
+      ),
+    );
     await tester.tap(find.text('Listas'));
     await tester.pumpAndSettle();
     await tester.enterText(find.byType(TextField), 'Chá');
