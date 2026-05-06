@@ -15,7 +15,9 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+  const MyApp({super.key, this.randomOrgService});
+
+  final RandomOrgService? randomOrgService;
 
   @override
   Widget build(BuildContext context) {
@@ -84,25 +86,37 @@ class MyApp extends StatelessWidget {
           ),
         ),
       ),
-      home: const UniverseDecidesApp(),
+      home: UniverseDecidesApp(randomOrgService: randomOrgService),
     );
   }
 }
 
 class UniverseDecidesApp extends StatefulWidget {
-  const UniverseDecidesApp({super.key});
+  const UniverseDecidesApp({super.key, this.randomOrgService});
+
+  final RandomOrgService? randomOrgService;
 
   @override
   State<UniverseDecidesApp> createState() => _UniverseDecidesAppState();
 }
 
 class _UniverseDecidesAppState extends State<UniverseDecidesApp> {
-  final RandomOrgService _randomOrgService = RandomOrgService();
+  late final RandomOrgService _randomOrgService;
+  late final bool _ownsRandomOrgService;
   int _selectedIndex = 0;
 
   @override
+  void initState() {
+    super.initState();
+    _ownsRandomOrgService = widget.randomOrgService == null;
+    _randomOrgService = widget.randomOrgService ?? RandomOrgService();
+  }
+
+  @override
   void dispose() {
-    _randomOrgService.dispose();
+    if (_ownsRandomOrgService) {
+      _randomOrgService.dispose();
+    }
     super.dispose();
   }
 
