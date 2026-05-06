@@ -1,28 +1,100 @@
-// This is a basic Flutter widget test.
-//
-// To perform an interaction with a widget in your test, use the WidgetTester
-// utility in the flutter_test package. For example, you can send tap and scroll
-// gestures. You can also use WidgetTester to find child widgets in the widget
-// tree, read text, and verify that the values of widget properties are correct.
+import 'dart:collection';
 
 import 'package:flutter_test/flutter_test.dart';
-
-import 'package:indecisive_person/main.dart';
+import 'package:theuniversedecides/main.dart';
 
 void main() {
-  testWidgets('shows release prep overview for the app', (
+  testWidgets('coin screen uses the random service', (WidgetTester tester) async {
+    final service = _FakeRandomOrgService([
+      [1],
+    ]);
+
+    await tester.pumpWidget(
+      MyApp(
+        overrides: [
+          randomOrgServiceProvider.overrideWith((ref) => service),
+        ],
+      ),
+    );
+    await tester.tap(find.text('Lançar a moeda'));
+    await tester.pumpAndSettle();
+
+    expect(find.text('COROA'), findsOneWidget);
+    expect(service.requests, [(1, 0, 1)]);
+  });
+
+  testWidgets('dice screen requests the selected dice configuration', (
     WidgetTester tester,
   ) async {
-    await tester.pumpWidget(const MyApp());
+    final service = _FakeRandomOrgService([
+      [2, 3],
+    ]);
 
-    expect(find.text('The Universe Decides'), findsOneWidget);
-    expect(find.text('Core experiences'), findsOneWidget);
-    expect(find.text('Animated Coin Flip'), findsOneWidget);
-    expect(find.text('RPG Dice Roller'), findsOneWidget);
-    expect(find.text('Custom List Picker'), findsOneWidget);
-    expect(find.text('Release readiness'), findsOneWidget);
-    expect(find.text('Polished icon and assets'), findsOneWidget);
-    expect(find.text('Unique package name'), findsOneWidget);
-    expect(find.text('Android release keystore'), findsOneWidget);
+    await tester.pumpWidget(
+      MyApp(
+        overrides: [
+          randomOrgServiceProvider.overrideWith((ref) => service),
+        ],
+      ),
+    );
+    await tester.tap(find.text('Dados'));
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('2'));
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('Rolar os dados'));
+    await tester.pumpAndSettle();
+
+    expect(find.text('Total: 5'), findsOneWidget);
+    expect(service.requests, [(2, 1, 20)]);
   });
+
+  testWidgets('list screen picks one item through the random service', (
+    WidgetTester tester,
+  ) async {
+    final service = _FakeRandomOrgService([
+      [1],
+    ]);
+
+    await tester.pumpWidget(
+      MyApp(
+        overrides: [
+          randomOrgServiceProvider.overrideWith((ref) => service),
+        ],
+      ),
+    );
+    await tester.tap(find.text('Listas'));
+    await tester.pumpAndSettle();
+    await tester.enterText(find.byType(TextField), 'Chá');
+    await tester.tap(find.text('Adicionar'));
+    await tester.pumpAndSettle();
+    await tester.enterText(find.byType(TextField), 'Café');
+    await tester.tap(find.text('Adicionar'));
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('Escolher por mim'));
+    await tester.pumpAndSettle();
+
+    expect(find.text('Café'), findsWidgets);
+    expect(service.requests, [(1, 0, 1)]);
+  });
+}
+
+class _FakeRandomOrgService extends RandomOrgService {
+  _FakeRandomOrgService(List<List<int>> responses)
+    : _responses = Queue.of(responses);
+
+  final Queue<List<int>> _responses;
+  final List<(int, int, int)> requests = [];
+
+  @override
+  Future<List<int>> fetchIntegers({
+    required int count,
+    required int min,
+    required int max,
+  }) async {
+    requests.add((count, min, max));
+    return _responses.isEmpty ? const [] : _responses.removeFirst();
+  }
+
+  @override
+  void dispose() {}
 }

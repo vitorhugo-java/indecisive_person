@@ -1,13 +1,12 @@
 # The Universe Decides 🌌
 
-The Universe Decides is a polished Flutter shell for an indecisive-person utility app. This phase focuses on release preparation by replacing the default starter screen with a branded overview and by tightening the native app setup for store submission.
+The Universe Decides is a Flutter decision app with a dark mystical Material 3 interface. It uses Random.org whenever possible and silently falls back to local randomness when the network is unavailable.
 
-## Included in this phase
+## Included in this app
 
-- Branded home screen describing the three core experiences:
-  - Animated Coin Flip
-  - RPG Dice Roller
-  - Custom List Picker
+- Coin flip screen with animated tosses
+- RPG dice roller with configurable quantities and polyhedral sides
+- Custom list picker with highlighted winners
 - Consistent app naming for Android and iOS
 - Unique application identifier: `com.hugo.theuniversedecides`
 - Release signing support through `android/key.properties`
