@@ -250,12 +250,12 @@ class _CoinFlipScreenState extends State<CoinFlipScreen>
     });
 
     final animation = _controller.forward(from: 0);
-    final result = (await widget.randomOrgService.fetchIntegers(
+    final values = await widget.randomOrgService.fetchIntegers(
       count: 1,
       min: 0,
       max: 1,
-    ))
-        .single;
+    );
+    final result = values.isEmpty ? 0 : values.first;
 
     await animation;
     if (!mounted) {
@@ -674,12 +674,12 @@ class _ListPickerScreenState extends State<ListPickerScreen> {
       _selectedIndex = null;
     });
 
-    final chosenIndex = (await widget.randomOrgService.fetchIntegers(
+    final values = await widget.randomOrgService.fetchIntegers(
       count: 1,
       min: 0,
       max: _items.length - 1,
-    ))
-        .single;
+    );
+    final chosenIndex = values.isEmpty ? 0 : values.first;
 
     if (!mounted) {
       return;
