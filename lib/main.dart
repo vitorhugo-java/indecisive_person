@@ -5,7 +5,10 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
 const _appTitle = 'The Universe Decides';
+/// Random.org plain integer endpoint used with fixed formatting parameters so
+/// each request returns one base-10 integer per line.
 const _randomOrgBaseUrl = 'https://www.random.org/integers/';
+const _randomOrgTimeout = Duration(seconds: 6);
 
 void main() {
   runApp(const MyApp());
@@ -180,7 +183,8 @@ class RandomOrgService {
     );
 
     try {
-      final response = await _client.get(uri).timeout(const Duration(seconds: 6));
+      // Keep the wait short so the UI can fall back quickly on slow networks.
+      final response = await _client.get(uri).timeout(_randomOrgTimeout);
       if (response.statusCode != 200) {
         return fallback;
       }
@@ -194,6 +198,7 @@ class RandomOrgService {
           .toList();
 
       if (values.length != count) {
+        // Unexpected payloads should feel the same as offline mode to callers.
         return fallback;
       }
 
