@@ -5,9 +5,7 @@ import 'package:theuniversedecides/services/random_org_service.dart';
 const _unset = Object();
 
 final coinFlipProvider =
-    StateNotifierProvider<CoinFlipController, CoinFlipState>((ref) {
-      return CoinFlipController(ref.read(randomOrgServiceProvider));
-    });
+    NotifierProvider<CoinFlipController, CoinFlipState>(CoinFlipController.new);
 
 class CoinFlipState {
   const CoinFlipState({this.result, this.isLoading = false});
@@ -23,10 +21,14 @@ class CoinFlipState {
   }
 }
 
-class CoinFlipController extends StateNotifier<CoinFlipState> {
-  CoinFlipController(this._randomOrgService) : super(const CoinFlipState());
+class CoinFlipController extends Notifier<CoinFlipState> {
+  late final RandomOrgService _randomOrgService;
 
-  final RandomOrgService _randomOrgService;
+  @override
+  CoinFlipState build() {
+    _randomOrgService = ref.read(randomOrgServiceProvider);
+    return const CoinFlipState();
+  }
 
   Future<void> flip() async {
     if (state.isLoading) {

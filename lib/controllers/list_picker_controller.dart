@@ -5,9 +5,9 @@ import 'package:theuniversedecides/services/random_org_service.dart';
 const _unset = Object();
 
 final listPickerProvider =
-    StateNotifierProvider<ListPickerController, ListPickerState>((ref) {
-      return ListPickerController(ref.read(randomOrgServiceProvider));
-    });
+    NotifierProvider<ListPickerController, ListPickerState>(
+      ListPickerController.new,
+    );
 
 class ListPickerState {
   const ListPickerState({
@@ -35,10 +35,14 @@ class ListPickerState {
   }
 }
 
-class ListPickerController extends StateNotifier<ListPickerState> {
-  ListPickerController(this._randomOrgService) : super(const ListPickerState());
+class ListPickerController extends Notifier<ListPickerState> {
+  late final RandomOrgService _randomOrgService;
 
-  final RandomOrgService _randomOrgService;
+  @override
+  ListPickerState build() {
+    _randomOrgService = ref.read(randomOrgServiceProvider);
+    return const ListPickerState();
+  }
 
   void addItem(String value) {
     final trimmed = value.trim();
