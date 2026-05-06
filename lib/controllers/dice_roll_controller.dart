@@ -3,9 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:theuniversedecides/services/random_org_service.dart';
 
 final diceRollProvider =
-    StateNotifierProvider<DiceRollController, DiceRollState>((ref) {
-      return DiceRollController(ref.read(randomOrgServiceProvider));
-    });
+    NotifierProvider<DiceRollController, DiceRollState>(DiceRollController.new);
 
 class DiceRollState {
   const DiceRollState({
@@ -35,10 +33,14 @@ class DiceRollState {
   }
 }
 
-class DiceRollController extends StateNotifier<DiceRollState> {
-  DiceRollController(this._randomOrgService) : super(const DiceRollState());
+class DiceRollController extends Notifier<DiceRollState> {
+  late final RandomOrgService _randomOrgService;
 
-  final RandomOrgService _randomOrgService;
+  @override
+  DiceRollState build() {
+    _randomOrgService = ref.read(randomOrgServiceProvider);
+    return const DiceRollState();
+  }
 
   void setDiceCount(int value) {
     state = state.copyWith(diceCount: value);
