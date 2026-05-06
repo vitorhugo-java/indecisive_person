@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
 
 const _appName = 'The Universe Decides';
+const _primaryColor = Color(0xFF5B4BFF);
+const _accentColor = Color(0xFF00A7FF);
+const _backgroundColor = Color(0xFF101223);
+const _cardColor = Color(0xFF191D33);
+const _iconTintColor = Color(0xFFB8B2FF);
 
 void main() {
   runApp(const MyApp());
@@ -16,10 +21,10 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(
-          seedColor: const Color(0xFF5B4BFF),
+          seedColor: _primaryColor,
           brightness: Brightness.dark,
         ),
-        scaffoldBackgroundColor: const Color(0xFF101223),
+        scaffoldBackgroundColor: _backgroundColor,
         useMaterial3: true,
       ),
       home: const ReleasePrepPage(),
@@ -87,7 +92,7 @@ class ReleasePrepPage extends StatelessWidget {
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(28),
                   gradient: const LinearGradient(
-                    colors: [Color(0xFF5B4BFF), Color(0xFF00A7FF)],
+                    colors: [_primaryColor, _accentColor],
                     begin: Alignment.topLeft,
                     end: Alignment.bottomRight,
                   ),
@@ -159,17 +164,17 @@ class ReleasePrepPage extends StatelessWidget {
       padding: const EdgeInsets.only(bottom: 12),
       child: Card(
         elevation: 0,
-        color: const Color(0xFF191D33),
+        color: _cardColor,
         child: ListTile(
           contentPadding: const EdgeInsets.all(18),
           leading: Container(
             width: 48,
             height: 48,
             decoration: BoxDecoration(
-              color: const Color(0xFF5B4BFF).withOpacity(0.18),
+              color: _primaryColor.withOpacity(0.18),
               borderRadius: BorderRadius.circular(14),
             ),
-            child: Icon(item.icon, color: const Color(0xFFB8B2FF)),
+            child: Icon(item.icon, color: _iconTintColor),
           ),
           title: Text(
             item.title,
