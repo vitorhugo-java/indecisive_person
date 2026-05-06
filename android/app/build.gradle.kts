@@ -1,3 +1,5 @@
+import java.util.Properties
+
 plugins {
     id("com.android.application")
     id("kotlin-android")
@@ -5,8 +7,16 @@ plugins {
     id("dev.flutter.flutter-gradle-plugin")
 }
 
+val releaseKeyProperties = Properties()
+val releaseKeyPropertiesFile = rootProject.file("key.properties")
+val hasReleaseKeystore = releaseKeyPropertiesFile.exists()
+
+if (hasReleaseKeystore) {
+    releaseKeyPropertiesFile.inputStream().use(releaseKeyProperties::load)
+}
+
 android {
-    namespace = "com.hugojava.indecisive_person"
+    namespace = "com.hugo.theuniversedecides"
     compileSdk = flutter.compileSdkVersion
     ndkVersion = flutter.ndkVersion
 
@@ -20,21 +30,32 @@ android {
     }
 
     defaultConfig {
-        // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
-        applicationId = "com.hugojava.indecisive_person"
-        // You can update the following values to match your application needs.
-        // For more information, see: https://flutter.dev/to/review-gradle-config.
+        applicationId = "com.hugo.theuniversedecides"
         minSdk = flutter.minSdkVersion
         targetSdk = flutter.targetSdkVersion
         versionCode = flutter.versionCode
         versionName = flutter.versionName
     }
 
+    signingConfigs {
+        create("release") {
+            if (hasReleaseKeystore) {
+                storeFile = rootProject.file(releaseKeyProperties.getProperty("storeFile"))
+                storePassword = releaseKeyProperties.getProperty("storePassword")
+                keyAlias = releaseKeyProperties.getProperty("keyAlias")
+                keyPassword = releaseKeyProperties.getProperty("keyPassword")
+            }
+        }
+    }
+
     buildTypes {
         release {
-            // TODO: Add your own signing config for the release build.
-            // Signing with the debug keys for now, so `flutter run --release` works.
-            signingConfig = signingConfigs.getByName("debug")
+            signingConfig =
+                if (hasReleaseKeystore) {
+                    signingConfigs.getByName("release")
+                } else {
+                    signingConfigs.getByName("debug")
+                }
         }
     }
 }

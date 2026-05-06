@@ -1,4 +1,4 @@
-package com.hugojava.indecisive_person;
+package com.hugo.theuniversedecides;
 
 import io.flutter.embedding.android.FlutterActivity;
 
