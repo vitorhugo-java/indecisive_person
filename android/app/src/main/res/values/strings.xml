@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="quick_tile_coin_label">Moeda</string>
+    <string name="quick_tile_dice_label">Dado d20</string>
+</resources>

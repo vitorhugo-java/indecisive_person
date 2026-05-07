@@ -8,6 +8,7 @@ import 'package:http/http.dart' as http;
 import 'package:http/testing.dart';
 import 'package:theuniversedecides/main.dart';
 import 'package:theuniversedecides/services/github_profile_service.dart';
+import 'package:theuniversedecides/services/quick_access_service.dart';
 import 'package:theuniversedecides/services/random_org_service.dart';
 
 void main() {
@@ -37,6 +38,9 @@ void main() {
                 name: 'Vitor Hugo',
               ),
             ),
+          ),
+          quickAccessServiceProvider.overrideWith(
+            (ref) => _FakeQuickAccessService(),
           ),
         ],
         child: const UniverseDecidesApp(),
@@ -68,6 +72,9 @@ void main() {
                 name: 'Vitor Hugo',
               ),
             ),
+          ),
+          quickAccessServiceProvider.overrideWith(
+            (ref) => _FakeQuickAccessService(),
           ),
         ],
         child: const UniverseDecidesApp(),
@@ -104,6 +111,9 @@ void main() {
               ),
             ),
           ),
+          quickAccessServiceProvider.overrideWith(
+            (ref) => _FakeQuickAccessService(),
+          ),
         ],
         child: const UniverseDecidesApp(),
       ),
@@ -135,12 +145,14 @@ void main() {
         bio: 'Developer',
       ),
     );
+    final quickAccessService = _FakeQuickAccessService();
 
     await tester.pumpWidget(
       ProviderScope(
         overrides: [
           randomOrgServiceProvider.overrideWith((ref) => randomService),
           githubProfileServiceProvider.overrideWith((ref) => githubService),
+          quickAccessServiceProvider.overrideWith((ref) => quickAccessService),
         ],
         child: const UniverseDecidesApp(),
       ),
@@ -152,7 +164,43 @@ void main() {
     expect(find.byType(AppBar), findsNothing);
     expect(find.text('Vitor Hugo'), findsOneWidget);
     expect(find.text('@vitorhugo-java'), findsOneWidget);
+    expect(find.text('Adicionar moeda'), findsOneWidget);
+    expect(find.text('Adicionar d20'), findsOneWidget);
     expect(githubService.usernames, ['vitorhugo-java']);
+  });
+
+  testWidgets('quick dice action opens dice and rolls d20 by default', (
+    WidgetTester tester,
+  ) async {
+    final randomService = _FakeRandomOrgService([
+      [17],
+    ]);
+
+    await tester.pumpWidget(
+      ProviderScope(
+        overrides: [
+          randomOrgServiceProvider.overrideWith((ref) => randomService),
+          githubProfileServiceProvider.overrideWith(
+            (ref) => _FakeGitHubProfileService(
+              const GitHubProfile(
+                login: 'vitorhugo-java',
+                avatarUrl: '',
+                name: 'Vitor Hugo',
+              ),
+            ),
+          ),
+          quickAccessServiceProvider.overrideWith(
+            (ref) =>
+                _FakeQuickAccessService(initialAction: QuickAccessAction.dice),
+          ),
+        ],
+        child: const UniverseDecidesApp(),
+      ),
+    );
+    await tester.pumpAndSettle();
+
+    expect(find.text('Total: 17'), findsOneWidget);
+    expect(randomService.requests, [(1, 1, 20)]);
   });
 }
 
@@ -196,4 +244,23 @@ class _FakeGitHubProfileService extends GitHubProfileService {
 
   @override
   void dispose() {}
+}
+
+class _FakeQuickAccessService implements QuickAccessService {
+  _FakeQuickAccessService({this.initialAction});
+
+  final QuickAccessAction? initialAction;
+
+  @override
+  Stream<QuickAccessAction> get actions => const Stream.empty();
+
+  @override
+  Future<QuickAccessAction?> getInitialAction() async => initialAction;
+
+  @override
+  Future<QuickAccessTileRequestResult> requestTile(
+    QuickAccessAction action,
+  ) async {
+    return QuickAccessTileRequestResult.added;
+  }
 }

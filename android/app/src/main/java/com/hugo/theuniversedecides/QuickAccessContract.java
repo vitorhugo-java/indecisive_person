@@ -1,0 +1,12 @@
+package com.hugo.theuniversedecides;
+
+final class QuickAccessContract {
+    static final String METHOD_CHANNEL = "theuniversedecides/quick_access";
+    static final String EVENT_CHANNEL = "theuniversedecides/quick_access/events";
+    static final String EXTRA_ACTION = "quick_action";
+    static final String ARG_ACTION = "action";
+    static final String ACTION_COIN = "coin";
+    static final String ACTION_DICE = "dice";
+
+    private QuickAccessContract() {}
+}

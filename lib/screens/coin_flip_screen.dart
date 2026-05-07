@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:theuniversedecides/controllers/coin_flip_controller.dart';
+import 'package:theuniversedecides/services/quick_access_service.dart';
 import 'package:theuniversedecides/widgets/mystic_screen_scaffold.dart';
 
 class CoinFlipScreen extends ConsumerStatefulWidget {
@@ -45,6 +46,12 @@ class _CoinFlipScreenState extends ConsumerState<CoinFlipScreen>
 
   @override
   Widget build(BuildContext context) {
+    ref.listen<int>(coinQuickAccessTriggerProvider, (previous, next) {
+      if (previous != next) {
+        _flipCoin();
+      }
+    });
+
     final theme = Theme.of(context);
     final state = ref.watch(coinFlipProvider);
     final resultLabel = switch (state.result) {

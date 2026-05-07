@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:theuniversedecides/controllers/dice_roll_controller.dart';
+import 'package:theuniversedecides/services/quick_access_service.dart';
 import 'package:theuniversedecides/widgets/mystic_screen_scaffold.dart';
 
 class DiceRollScreen extends ConsumerWidget {
@@ -15,6 +16,16 @@ class DiceRollScreen extends ConsumerWidget {
     final state = ref.watch(diceRollProvider);
     final controller = ref.read(diceRollProvider.notifier);
     final total = state.results.fold<int>(0, (sum, value) => sum + value);
+
+    ref.listen<int>(diceQuickAccessTriggerProvider, (previous, next) {
+      if (previous == next) {
+        return;
+      }
+
+      controller.setDiceCount(1);
+      controller.setSelectedSides(20);
+      controller.roll();
+    });
 
     return MysticScreenScaffold(
       title: 'Dados',

@@ -1,19 +1,24 @@
-import 'package:flutter/material.dart';
+import 'dart:async';
 
+import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+
+import 'package:theuniversedecides/services/quick_access_service.dart';
 import 'package:theuniversedecides/screens/about_me_screen.dart';
 import 'package:theuniversedecides/screens/coin_flip_screen.dart';
 import 'package:theuniversedecides/screens/dice_roll_screen.dart';
 import 'package:theuniversedecides/screens/list_picker_screen.dart';
 
-class MainScreen extends StatefulWidget {
+class MainScreen extends ConsumerStatefulWidget {
   const MainScreen({super.key});
 
   @override
-  State<MainScreen> createState() => _MainScreenState();
+  ConsumerState<MainScreen> createState() => _MainScreenState();
 }
 
-class _MainScreenState extends State<MainScreen> {
+class _MainScreenState extends ConsumerState<MainScreen> {
   int _selectedIndex = 0;
+  late final StreamSubscription<QuickAccessAction> _quickAccessSubscription;
 
   static const _screens = [
     CoinFlipScreen(),
@@ -21,6 +26,56 @@ class _MainScreenState extends State<MainScreen> {
     ListPickerScreen(),
     AboutMeScreen(),
   ];
+
+  @override
+  void initState() {
+    super.initState();
+    final quickAccessService = ref.read(quickAccessServiceProvider);
+    _quickAccessSubscription = quickAccessService.actions.listen(
+      _handleQuickAccessAction,
+    );
+    _loadInitialQuickAccessAction(quickAccessService);
+  }
+
+  Future<void> _loadInitialQuickAccessAction(
+    QuickAccessService quickAccessService,
+  ) async {
+    final action = await quickAccessService.getInitialAction();
+    if (!mounted || action == null) {
+      return;
+    }
+
+    _handleQuickAccessAction(action);
+  }
+
+  void _handleQuickAccessAction(QuickAccessAction action) {
+    if (!mounted) {
+      return;
+    }
+
+    setState(() {
+      _selectedIndex = action.tabIndex;
+    });
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (!mounted) {
+        return;
+      }
+
+      switch (action) {
+        case QuickAccessAction.coin:
+          ref.read(coinQuickAccessTriggerProvider.notifier).trigger();
+        case QuickAccessAction.dice:
+          ref.read(diceQuickAccessTriggerProvider.notifier).trigger();
+      }
+    });
+  }
+
+  @override
+  void dispose() {
+    _quickAccessSubscription.cancel();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
