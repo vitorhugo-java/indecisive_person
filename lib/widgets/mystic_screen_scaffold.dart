@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+import 'package:theuniversedecides/theme/app_colors.dart';
+
 class MysticScreenScaffold extends StatelessWidget {
   const MysticScreenScaffold({
     super.key,
@@ -19,7 +21,11 @@ class MysticScreenScaffold extends StatelessWidget {
     return DecoratedBox(
       decoration: const BoxDecoration(
         gradient: LinearGradient(
-          colors: [Color(0xFF090611), Color(0xFF12091E), Color(0xFF090611)],
+          colors: [
+            AppColors.scaffoldBackground,
+            AppColors.backgroundGradientMiddle,
+            AppColors.scaffoldBackground,
+          ],
           begin: Alignment.topCenter,
           end: Alignment.bottomCenter,
         ),
@@ -32,7 +38,10 @@ class MysticScreenScaffold extends StatelessWidget {
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(28),
               gradient: const LinearGradient(
-                colors: [Color(0xFF2E1D55), Color(0xFF120C1C)],
+                colors: [
+                  AppColors.heroGradientStart,
+                  AppColors.navigationBackground,
+                ],
                 begin: Alignment.topLeft,
                 end: Alignment.bottomRight,
               ),

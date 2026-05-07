@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:theuniversedecides/controllers/list_picker_controller.dart';
+import 'package:theuniversedecides/l10n/generated/app_localizations.dart';
+import 'package:theuniversedecides/theme/app_colors.dart';
 import 'package:theuniversedecides/widgets/mystic_screen_scaffold.dart';
 
 class ListPickerScreen extends ConsumerStatefulWidget {
@@ -28,13 +30,13 @@ class _ListPickerScreenState extends ConsumerState<ListPickerScreen> {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final l10n = AppLocalizations.of(context)!;
     final state = ref.watch(listPickerProvider);
     final controller = ref.read(listPickerProvider.notifier);
 
     return MysticScreenScaffold(
-      title: 'Listas',
-      subtitle:
-          'Escreva possibilidades, convide o universo e destaque um único destino para a sua próxima decisão.',
+      title: l10n.navLists,
+      subtitle: l10n.listSubtitle,
       child: Column(
         children: [
           Card(
@@ -50,16 +52,16 @@ class _ListPickerScreenState extends ConsumerState<ListPickerScreen> {
                           controller: _controller,
                           textInputAction: TextInputAction.done,
                           onSubmitted: (_) => _addItem(),
-                          decoration: const InputDecoration(
-                            labelText: 'Adicionar opção',
-                            hintText: 'Ex.: Viajar, dormir, pedir pizza...',
+                          decoration: InputDecoration(
+                            labelText: l10n.listAddOptionLabel,
+                            hintText: l10n.listAddOptionHint,
                           ),
                         ),
                       ),
                       const SizedBox(width: 12),
                       FilledButton(
                         onPressed: _addItem,
-                        child: const Text('Adicionar'),
+                        child: Text(l10n.listAddButton),
                       ),
                     ],
                   ),
@@ -71,7 +73,7 @@ class _ListPickerScreenState extends ConsumerState<ListPickerScreen> {
                           ? null
                           : controller.pickItem,
                       icon: const Icon(Icons.auto_awesome),
-                      label: const Text('Escolher por mim'),
+                      label: Text(l10n.listChooseButton),
                     ),
                   ),
                   const SizedBox(height: 20),
@@ -87,12 +89,10 @@ class _ListPickerScreenState extends ConsumerState<ListPickerScreen> {
                             width: double.infinity,
                             padding: const EdgeInsets.all(20),
                             decoration: BoxDecoration(
-                              color: const Color(0xFF1A1327),
+                              color: AppColors.panelBackground,
                               borderRadius: BorderRadius.circular(20),
                             ),
-                            child: const Text(
-                              'Adicione itens à lista para deixar a escolha nas mãos do universo.',
-                            ),
+                            child: Text(l10n.listEmptyState),
                           )
                         : Column(
                             key: ValueKey(
@@ -107,8 +107,8 @@ class _ListPickerScreenState extends ConsumerState<ListPickerScreen> {
                                     borderRadius: BorderRadius.circular(20),
                                     gradient: const LinearGradient(
                                       colors: [
-                                        Color(0xFF3E2D73),
-                                        Color(0xFF7A4FFF),
+                                        AppColors.listResultGradientStart,
+                                        AppColors.listResultGradientEnd,
                                       ],
                                     ),
                                   ),
@@ -117,9 +117,11 @@ class _ListPickerScreenState extends ConsumerState<ListPickerScreen> {
                                         CrossAxisAlignment.start,
                                     children: [
                                       Text(
-                                        'Escolhido pelo universo',
+                                        l10n.listChosenByUniverse,
                                         style: theme.textTheme.labelLarge
-                                            ?.copyWith(color: Colors.white70),
+                                            ?.copyWith(
+                                              color: AppColors.whiteMuted,
+                                            ),
                                       ),
                                       const SizedBox(height: 8),
                                       Text(
@@ -127,7 +129,7 @@ class _ListPickerScreenState extends ConsumerState<ListPickerScreen> {
                                         style: theme.textTheme.headlineSmall
                                             ?.copyWith(
                                               fontWeight: FontWeight.w900,
-                                              color: Colors.white,
+                                              color: AppColors.whiteStrong,
                                             ),
                                       ),
                                     ],
@@ -150,7 +152,7 @@ class _ListPickerScreenState extends ConsumerState<ListPickerScreen> {
                                       borderRadius: BorderRadius.circular(18),
                                       color: isSelected
                                           ? theme.colorScheme.primaryContainer
-                                          : const Color(0xFF171124),
+                                          : AppColors.inputFill,
                                       border: Border.all(
                                         color: isSelected
                                             ? theme.colorScheme.primary

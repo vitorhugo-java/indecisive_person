@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:theuniversedecides/services/github_profile_service.dart';
+import 'package:theuniversedecides/l10n/generated/app_localizations.dart';
 import 'package:theuniversedecides/services/quick_access_service.dart';
+import 'package:theuniversedecides/theme/app_colors.dart';
 import 'package:theuniversedecides/widgets/mystic_screen_scaffold.dart';
 
 class AboutMeScreen extends ConsumerStatefulWidget {
@@ -17,6 +19,7 @@ class AboutMeScreen extends ConsumerStatefulWidget {
 class _AboutMeScreenState extends ConsumerState<AboutMeScreen> {
   Future<void> _requestTile(QuickAccessAction action) async {
     final messenger = ScaffoldMessenger.of(context);
+    final l10n = AppLocalizations.of(context)!;
     final result = await ref
         .read(quickAccessServiceProvider)
         .requestTile(action);
@@ -26,21 +29,21 @@ class _AboutMeScreenState extends ConsumerState<AboutMeScreen> {
 
     final message = switch ((action, result)) {
       (QuickAccessAction.coin, QuickAccessTileRequestResult.added) =>
-        'Atalho da moeda adicionado ao painel.',
+        l10n.quickTileCoinAdded,
       (QuickAccessAction.coin, QuickAccessTileRequestResult.alreadyAdded) =>
-        'O atalho da moeda ja estava no painel.',
+        l10n.quickTileCoinAlreadyAdded,
       (QuickAccessAction.coin, QuickAccessTileRequestResult.cancelled) =>
-        'Adicao da moeda cancelada.',
+        l10n.quickTileCoinCancelled,
       (QuickAccessAction.coin, QuickAccessTileRequestResult.unsupported) =>
-        'Seu Android nao permite pedir esse atalho pelo app.',
+        l10n.quickTileCoinUnsupported,
       (QuickAccessAction.dice, QuickAccessTileRequestResult.added) =>
-        'Atalho do d20 adicionado ao painel.',
+        l10n.quickTileDiceAdded,
       (QuickAccessAction.dice, QuickAccessTileRequestResult.alreadyAdded) =>
-        'O atalho do d20 ja estava no painel.',
+        l10n.quickTileDiceAlreadyAdded,
       (QuickAccessAction.dice, QuickAccessTileRequestResult.cancelled) =>
-        'Adicao do d20 cancelada.',
+        l10n.quickTileDiceCancelled,
       (QuickAccessAction.dice, QuickAccessTileRequestResult.unsupported) =>
-        'Seu Android nao permite pedir esse atalho pelo app.',
+        l10n.quickTileDiceUnsupported,
     };
 
     messenger.showSnackBar(SnackBar(content: Text(message)));
@@ -49,14 +52,14 @@ class _AboutMeScreenState extends ConsumerState<AboutMeScreen> {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final l10n = AppLocalizations.of(context)!;
     final profileAsync = ref.watch(
       githubProfileProvider(AboutMeScreen._githubUsername),
     );
 
     return MysticScreenScaffold(
-      title: 'Sobre mim',
-      subtitle:
-          'Um cantinho com o perfil do criador, puxando o avatar direto da API do GitHub.',
+      title: l10n.navAboutMe,
+      subtitle: l10n.aboutSubtitle,
       child: Column(
         children: [
           Card(
@@ -106,7 +109,7 @@ class _AboutMeScreenState extends ConsumerState<AboutMeScreen> {
                       width: double.infinity,
                       padding: const EdgeInsets.all(18),
                       decoration: BoxDecoration(
-                        color: const Color(0xFF1A1327),
+                        color: AppColors.panelBackground,
                         borderRadius: BorderRadius.circular(20),
                       ),
                       child: Text(
@@ -125,7 +128,7 @@ class _AboutMeScreenState extends ConsumerState<AboutMeScreen> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      'Nao foi possivel carregar o perfil agora.',
+                      l10n.aboutProfileLoadError,
                       style: theme.textTheme.titleMedium?.copyWith(
                         fontWeight: FontWeight.w700,
                       ),
@@ -140,7 +143,7 @@ class _AboutMeScreenState extends ConsumerState<AboutMeScreen> {
                         );
                       },
                       icon: const Icon(Icons.refresh),
-                      label: const Text('Tentar novamente'),
+                      label: Text(l10n.aboutRetryButton),
                     ),
                   ],
                 ),
@@ -155,14 +158,14 @@ class _AboutMeScreenState extends ConsumerState<AboutMeScreen> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'Acesso rapido no painel',
+                    l10n.aboutQuickAccessTitle,
                     style: theme.textTheme.titleLarge?.copyWith(
                       fontWeight: FontWeight.w800,
                     ),
                   ),
                   const SizedBox(height: 10),
                   Text(
-                    'Adicione atalhos da moeda e do d20 ao painel rapido do Android para abrir o app e executar a acao direto.',
+                    l10n.aboutQuickAccessDescription,
                     style: theme.textTheme.bodyLarge?.copyWith(height: 1.45),
                   ),
                   const SizedBox(height: 18),
@@ -173,12 +176,12 @@ class _AboutMeScreenState extends ConsumerState<AboutMeScreen> {
                       FilledButton.icon(
                         onPressed: () => _requestTile(QuickAccessAction.coin),
                         icon: const Icon(Icons.brightness_2),
-                        label: const Text('Adicionar moeda'),
+                        label: Text(l10n.aboutAddCoinButton),
                       ),
                       FilledButton.icon(
                         onPressed: () => _requestTile(QuickAccessAction.dice),
                         icon: const Icon(Icons.casino),
-                        label: const Text('Adicionar d20'),
+                        label: Text(l10n.aboutAddDiceButton),
                       ),
                     ],
                   ),
@@ -206,7 +209,7 @@ class _Avatar extends StatelessWidget {
       height: 92,
       decoration: BoxDecoration(
         shape: BoxShape.circle,
-        border: Border.all(color: Colors.white24, width: 2),
+        border: Border.all(color: AppColors.whiteBorder, width: 2),
       ),
       child: ClipOval(
         child: hasAvatar
@@ -214,12 +217,12 @@ class _Avatar extends StatelessWidget {
                 avatarUrl,
                 fit: BoxFit.cover,
                 errorBuilder: (_, _, _) => const ColoredBox(
-                  color: Color(0xFF1A1327),
+                  color: AppColors.panelBackground,
                   child: Icon(Icons.person, size: 44),
                 ),
               )
             : const ColoredBox(
-                color: Color(0xFF1A1327),
+                color: AppColors.panelBackground,
                 child: Icon(Icons.person, size: 44),
               ),
       ),

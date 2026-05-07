@@ -1,0 +1,51 @@
+{
+  "@@locale": "en",
+  "appTitle": "The Universe Decides",
+  "navCoin": "Coin",
+  "navDice": "Dice",
+  "navLists": "Lists",
+  "navAboutMe": "About me",
+  "coinSubtitle": "An enchanted coin that checks Random.org and falls back to local randomness whenever needed.",
+  "coinHeads": "HEADS",
+  "coinTails": "TAILS",
+  "coinPrompt": "Hand the choice over to the universe",
+  "coinTapPrompt": "Tap to discover the verdict.",
+  "coinResolved": "The universe chose your side.",
+  "coinButton": "Flip coin",
+  "diceSubtitle": "Roll your RPG dice with multiple sides and let destiny add up the final result.",
+  "diceCount": "Number of dice",
+  "diceSides": "Dice sides",
+  "diceRollButton": "Roll dice",
+  "diceEmptyState": "Choose your setup and roll to see each value and the final total.",
+  "diceResults": "Results",
+  "diceTotal": "Total: {total}",
+  "@diceTotal": {
+    "placeholders": {
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "listSubtitle": "Write down possibilities, invite the universe, and highlight a single destination for your next decision.",
+  "listAddOptionLabel": "Add option",
+  "listAddOptionHint": "E.g. Travel, sleep, order pizza...",
+  "listAddButton": "Add",
+  "listChooseButton": "Choose for me",
+  "listEmptyState": "Add items to the list and let the universe decide for you.",
+  "listChosenByUniverse": "Chosen by the universe",
+  "aboutSubtitle": "A small corner with the creator profile, loading the avatar straight from the GitHub API.",
+  "aboutProfileLoadError": "Could not load the profile right now.",
+  "aboutRetryButton": "Try again",
+  "aboutQuickAccessTitle": "Quick access in the panel",
+  "aboutQuickAccessDescription": "Add coin and d20 shortcuts to the Android quick settings panel to open the app and run the action immediately.",
+  "aboutAddCoinButton": "Add coin",
+  "aboutAddDiceButton": "Add d20",
+  "quickTileCoinAdded": "Coin shortcut added to the panel.",
+  "quickTileCoinAlreadyAdded": "The coin shortcut is already in the panel.",
+  "quickTileCoinCancelled": "Coin shortcut request cancelled.",
+  "quickTileCoinUnsupported": "Your Android version cannot add this shortcut from the app.",
+  "quickTileDiceAdded": "d20 shortcut added to the panel.",
+  "quickTileDiceAlreadyAdded": "The d20 shortcut is already in the panel.",
+  "quickTileDiceCancelled": "d20 shortcut request cancelled.",
+  "quickTileDiceUnsupported": "Your Android version cannot add this shortcut from the app."
+}

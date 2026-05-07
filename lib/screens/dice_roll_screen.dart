@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:theuniversedecides/controllers/dice_roll_controller.dart';
+import 'package:theuniversedecides/l10n/generated/app_localizations.dart';
 import 'package:theuniversedecides/services/quick_access_service.dart';
+import 'package:theuniversedecides/theme/app_colors.dart';
 import 'package:theuniversedecides/widgets/mystic_screen_scaffold.dart';
 
 class DiceRollScreen extends ConsumerWidget {
@@ -13,6 +15,7 @@ class DiceRollScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final theme = Theme.of(context);
+    final l10n = AppLocalizations.of(context)!;
     final state = ref.watch(diceRollProvider);
     final controller = ref.read(diceRollProvider.notifier);
     final total = state.results.fold<int>(0, (sum, value) => sum + value);
@@ -28,9 +31,8 @@ class DiceRollScreen extends ConsumerWidget {
     });
 
     return MysticScreenScaffold(
-      title: 'Dados',
-      subtitle:
-          'Role seus dados de RPG com múltiplos lados e deixe o destino somar o resultado final.',
+      title: l10n.navDice,
+      subtitle: l10n.diceSubtitle,
       child: Column(
         children: [
           Card(
@@ -40,7 +42,7 @@ class DiceRollScreen extends ConsumerWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'Quantidade de dados',
+                    l10n.diceCount,
                     style: theme.textTheme.titleMedium?.copyWith(
                       fontWeight: FontWeight.w700,
                     ),
@@ -61,7 +63,7 @@ class DiceRollScreen extends ConsumerWidget {
                   ),
                   const SizedBox(height: 24),
                   Text(
-                    'Lados do dado',
+                    l10n.diceSides,
                     style: theme.textTheme.titleMedium?.copyWith(
                       fontWeight: FontWeight.w700,
                     ),
@@ -86,7 +88,7 @@ class DiceRollScreen extends ConsumerWidget {
                   FilledButton.icon(
                     onPressed: state.isLoading ? null : controller.roll,
                     icon: const Icon(Icons.casino),
-                    label: const Text('Rolar os dados'),
+                    label: Text(l10n.diceRollButton),
                   ),
                   const SizedBox(height: 24),
                   AnimatedSwitcher(
@@ -103,19 +105,17 @@ class DiceRollScreen extends ConsumerWidget {
                             width: double.infinity,
                             padding: const EdgeInsets.all(20),
                             decoration: BoxDecoration(
-                              color: const Color(0xFF1A1327),
+                              color: AppColors.panelBackground,
                               borderRadius: BorderRadius.circular(20),
                             ),
-                            child: const Text(
-                              'Escolha a combinação e role para ver cada valor e a soma final.',
-                            ),
+                            child: Text(l10n.diceEmptyState),
                           )
                         : Column(
                             key: ValueKey(state.results.join(',')),
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                'Resultados',
+                                l10n.diceResults,
                                 style: theme.textTheme.titleMedium?.copyWith(
                                   fontWeight: FontWeight.w700,
                                 ),
@@ -163,7 +163,7 @@ class DiceRollScreen extends ConsumerWidget {
                               ),
                               const SizedBox(height: 18),
                               Text(
-                                'Total: $total',
+                                l10n.diceTotal(total),
                                 style: theme.textTheme.headlineSmall?.copyWith(
                                   fontWeight: FontWeight.w900,
                                 ),

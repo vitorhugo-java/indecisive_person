@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import 'package:theuniversedecides/l10n/generated/app_localizations.dart';
 import 'package:theuniversedecides/screens/main_screen.dart';
+import 'package:theuniversedecides/theme/app_colors.dart';
 
 void main() {
   runApp(const ProviderScope(child: UniverseDecidesApp()));
@@ -13,19 +16,26 @@ class UniverseDecidesApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final colorScheme = ColorScheme.fromSeed(
-      seedColor: Colors.deepPurple,
+      seedColor: AppColors.seed,
       brightness: Brightness.dark,
     );
 
     return MaterialApp(
-      title: 'The Universe Decides',
+      onGenerateTitle: (context) => AppLocalizations.of(context)!.appTitle,
       debugShowCheckedModeBanner: false,
+      localizationsDelegates: const [
+        AppLocalizations.delegate,
+        GlobalMaterialLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+      ],
+      supportedLocales: AppLocalizations.supportedLocales,
       theme: ThemeData(
         useMaterial3: true,
         colorScheme: colorScheme,
-        scaffoldBackgroundColor: const Color(0xFF090611),
+        scaffoldBackgroundColor: AppColors.scaffoldBackground,
         cardTheme: CardThemeData(
-          color: const Color(0xFF151021),
+          color: AppColors.cardBackground,
           elevation: 0,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(24),
@@ -35,7 +45,7 @@ class UniverseDecidesApp extends StatelessWidget {
           ),
         ),
         navigationBarTheme: NavigationBarThemeData(
-          backgroundColor: const Color(0xFF120C1C),
+          backgroundColor: AppColors.navigationBackground,
           indicatorColor: colorScheme.primary.withValues(alpha: 0.22),
           labelTextStyle: WidgetStateProperty.resolveWith((states) {
             final isSelected = states.contains(WidgetState.selected);
@@ -49,7 +59,7 @@ class UniverseDecidesApp extends StatelessWidget {
         ),
         snackBarTheme: SnackBarThemeData(
           behavior: SnackBarBehavior.floating,
-          backgroundColor: const Color(0xFF20172F),
+          backgroundColor: AppColors.snackBarBackground,
           contentTextStyle: TextStyle(color: colorScheme.onSurface),
         ),
         elevatedButtonTheme: ElevatedButtonThemeData(
@@ -60,7 +70,7 @@ class UniverseDecidesApp extends StatelessWidget {
         ),
         inputDecorationTheme: InputDecorationTheme(
           filled: true,
-          fillColor: const Color(0xFF171124),
+          fillColor: AppColors.inputFill,
           border: OutlineInputBorder(
             borderRadius: BorderRadius.circular(18),
             borderSide: BorderSide.none,

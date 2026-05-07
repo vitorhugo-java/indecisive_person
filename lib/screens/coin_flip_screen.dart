@@ -4,7 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:theuniversedecides/controllers/coin_flip_controller.dart';
+import 'package:theuniversedecides/l10n/generated/app_localizations.dart';
 import 'package:theuniversedecides/services/quick_access_service.dart';
+import 'package:theuniversedecides/theme/app_colors.dart';
 import 'package:theuniversedecides/widgets/mystic_screen_scaffold.dart';
 
 class CoinFlipScreen extends ConsumerStatefulWidget {
@@ -53,17 +55,17 @@ class _CoinFlipScreenState extends ConsumerState<CoinFlipScreen>
     });
 
     final theme = Theme.of(context);
+    final l10n = AppLocalizations.of(context)!;
     final state = ref.watch(coinFlipProvider);
     final resultLabel = switch (state.result) {
-      0 => 'CARA',
-      1 => 'COROA',
-      _ => 'Entregue a decisão ao universo',
+      0 => l10n.coinHeads,
+      1 => l10n.coinTails,
+      _ => l10n.coinPrompt,
     };
 
     return MysticScreenScaffold(
-      title: 'Moeda',
-      subtitle:
-          'Uma moeda encantada que consulta o Random.org e cai de volta no acaso local quando necessário.',
+      title: l10n.navCoin,
+      subtitle: l10n.coinSubtitle,
       child: Column(
         children: [
           Card(
@@ -125,8 +127,8 @@ class _CoinFlipScreenState extends ConsumerState<CoinFlipScreen>
                               const SizedBox(height: 8),
                               Text(
                                 state.result == null
-                                    ? 'Toque para descobrir o veredito.'
-                                    : 'O universo escolheu o seu lado.',
+                                    ? l10n.coinTapPrompt
+                                    : l10n.coinResolved,
                                 style: theme.textTheme.bodyMedium,
                                 textAlign: TextAlign.center,
                               ),
@@ -137,7 +139,7 @@ class _CoinFlipScreenState extends ConsumerState<CoinFlipScreen>
                   FilledButton.icon(
                     onPressed: state.isLoading ? null : _flipCoin,
                     icon: const Icon(Icons.cyclone),
-                    label: const Text('Lançar a moeda'),
+                    label: Text(l10n.coinButton),
                   ),
                 ],
               ),
@@ -157,6 +159,7 @@ class _CoinFace extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final l10n = AppLocalizations.of(context)!;
     final isCara = value == 0;
 
     return Container(
@@ -166,19 +169,19 @@ class _CoinFace extends StatelessWidget {
         shape: BoxShape.circle,
         gradient: LinearGradient(
           colors: isCara
-              ? const [Color(0xFFFCE38A), Color(0xFFF9B44C)]
-              : const [Color(0xFFE3D7FF), Color(0xFF8B7BFF)],
+              ? const [AppColors.coinFrontStart, AppColors.coinFrontEnd]
+              : const [AppColors.coinBackStart, AppColors.coinBackEnd],
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
         ),
         boxShadow: const [
           BoxShadow(
-            color: Color(0x66000000),
+            color: AppColors.shadow,
             blurRadius: 28,
             offset: Offset(0, 16),
           ),
         ],
-        border: Border.all(color: Colors.white24, width: 3),
+        border: Border.all(color: AppColors.whiteBorder, width: 3),
       ),
       child: Center(
         child: Column(
@@ -187,13 +190,13 @@ class _CoinFace extends StatelessWidget {
             Icon(
               isCara ? Icons.wb_sunny_rounded : Icons.nightlight_round,
               size: 44,
-              color: Colors.black.withValues(alpha: 0.75),
+              color: AppColors.blackSoft,
             ),
             const SizedBox(height: 12),
             Text(
-              isCara ? 'CARA' : 'COROA',
+              isCara ? l10n.coinHeads : l10n.coinTails,
               style: theme.textTheme.titleLarge?.copyWith(
-                color: Colors.black.withValues(alpha: 0.82),
+                color: AppColors.blackMuted,
                 fontWeight: FontWeight.w900,
                 letterSpacing: 1.5,
               ),

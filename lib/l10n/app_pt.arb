@@ -1,0 +1,51 @@
+{
+  "@@locale": "pt",
+  "appTitle": "The Universe Decides",
+  "navCoin": "Moeda",
+  "navDice": "Dados",
+  "navLists": "Listas",
+  "navAboutMe": "Sobre mim",
+  "coinSubtitle": "Uma moeda encantada que consulta o Random.org e cai de volta no acaso local quando necessario.",
+  "coinHeads": "CARA",
+  "coinTails": "COROA",
+  "coinPrompt": "Entregue a decisao ao universo",
+  "coinTapPrompt": "Toque para descobrir o veredito.",
+  "coinResolved": "O universo escolheu o seu lado.",
+  "coinButton": "Lancar a moeda",
+  "diceSubtitle": "Role seus dados de RPG com multiplos lados e deixe o destino somar o resultado final.",
+  "diceCount": "Quantidade de dados",
+  "diceSides": "Lados do dado",
+  "diceRollButton": "Rolar os dados",
+  "diceEmptyState": "Escolha a combinacao e role para ver cada valor e a soma final.",
+  "diceResults": "Resultados",
+  "diceTotal": "Total: {total}",
+  "@diceTotal": {
+    "placeholders": {
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "listSubtitle": "Escreva possibilidades, convide o universo e destaque um unico destino para a sua proxima decisao.",
+  "listAddOptionLabel": "Adicionar opcao",
+  "listAddOptionHint": "Ex.: Viajar, dormir, pedir pizza...",
+  "listAddButton": "Adicionar",
+  "listChooseButton": "Escolher por mim",
+  "listEmptyState": "Adicione itens a lista para deixar a escolha nas maos do universo.",
+  "listChosenByUniverse": "Escolhido pelo universo",
+  "aboutSubtitle": "Um cantinho com o perfil do criador, puxando o avatar direto da API do GitHub.",
+  "aboutProfileLoadError": "Nao foi possivel carregar o perfil agora.",
+  "aboutRetryButton": "Tentar novamente",
+  "aboutQuickAccessTitle": "Acesso rapido no painel",
+  "aboutQuickAccessDescription": "Adicione atalhos da moeda e do d20 ao painel rapido do Android para abrir o app e executar a acao direto.",
+  "aboutAddCoinButton": "Adicionar moeda",
+  "aboutAddDiceButton": "Adicionar d20",
+  "quickTileCoinAdded": "Atalho da moeda adicionado ao painel.",
+  "quickTileCoinAlreadyAdded": "O atalho da moeda ja estava no painel.",
+  "quickTileCoinCancelled": "Adicao da moeda cancelada.",
+  "quickTileCoinUnsupported": "Seu Android nao permite pedir esse atalho pelo app.",
+  "quickTileDiceAdded": "Atalho do d20 adicionado ao painel.",
+  "quickTileDiceAlreadyAdded": "O atalho do d20 ja estava no painel.",
+  "quickTileDiceCancelled": "Adicao do d20 cancelada.",
+  "quickTileDiceUnsupported": "Seu Android nao permite pedir esse atalho pelo app."
+}

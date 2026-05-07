@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import 'package:theuniversedecides/l10n/generated/app_localizations.dart';
 import 'package:theuniversedecides/services/quick_access_service.dart';
 import 'package:theuniversedecides/screens/about_me_screen.dart';
 import 'package:theuniversedecides/screens/coin_flip_screen.dart';
@@ -79,6 +80,8 @@ class _MainScreenState extends ConsumerState<MainScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final l10n = AppLocalizations.of(context)!;
+
     return Scaffold(
       body: SafeArea(
         child: IndexedStack(index: _selectedIndex, children: _screens),
@@ -90,26 +93,26 @@ class _MainScreenState extends ConsumerState<MainScreen> {
             _selectedIndex = index;
           });
         },
-        destinations: const [
+        destinations: [
           NavigationDestination(
-            icon: Icon(Icons.brightness_3_outlined),
-            selectedIcon: Icon(Icons.brightness_2),
-            label: 'Moeda',
+            icon: const Icon(Icons.brightness_3_outlined),
+            selectedIcon: const Icon(Icons.brightness_2),
+            label: l10n.navCoin,
           ),
           NavigationDestination(
-            icon: Icon(Icons.casino_outlined),
-            selectedIcon: Icon(Icons.casino),
-            label: 'Dados',
+            icon: const Icon(Icons.casino_outlined),
+            selectedIcon: const Icon(Icons.casino),
+            label: l10n.navDice,
           ),
           NavigationDestination(
-            icon: Icon(Icons.auto_awesome_outlined),
-            selectedIcon: Icon(Icons.auto_awesome),
-            label: 'Listas',
+            icon: const Icon(Icons.auto_awesome_outlined),
+            selectedIcon: const Icon(Icons.auto_awesome),
+            label: l10n.navLists,
           ),
           NavigationDestination(
-            icon: Icon(Icons.person_outline),
-            selectedIcon: Icon(Icons.person),
-            label: 'Sobre mim',
+            icon: const Icon(Icons.person_outline),
+            selectedIcon: const Icon(Icons.person),
+            label: l10n.navAboutMe,
           ),
         ],
       ),

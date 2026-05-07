@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">The Universe Decides</string>
-    <string name="quick_tile_coin_label">Coin</string>
-    <string name="quick_tile_dice_label">d20 Dice</string>
+    <string name="quick_tile_coin_label">Moeda</string>
+    <string name="quick_tile_dice_label">Dado d20</string>
 </resources>

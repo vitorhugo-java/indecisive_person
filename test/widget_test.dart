@@ -46,10 +46,10 @@ void main() {
         child: const UniverseDecidesApp(),
       ),
     );
-    await tester.tap(find.text('Lançar a moeda'));
+    await tester.tap(find.text('Flip coin'));
     await tester.pumpAndSettle();
 
-    expect(find.text('COROA'), findsWidgets);
+    expect(find.text('TAILS'), findsWidgets);
     expect(service.requests, [(1, 0, 1)]);
   });
 
@@ -80,11 +80,11 @@ void main() {
         child: const UniverseDecidesApp(),
       ),
     );
-    await tester.tap(find.text('Dados'));
+    await tester.tap(find.text('Dice'));
     await tester.pumpAndSettle();
     await tester.tap(find.text('2'));
     await tester.pumpAndSettle();
-    await tester.tap(find.text('Rolar os dados'));
+    await tester.tap(find.text('Roll dice'));
     await tester.pumpAndSettle();
 
     expect(find.text('Total: 5'), findsOneWidget);
@@ -118,15 +118,15 @@ void main() {
         child: const UniverseDecidesApp(),
       ),
     );
-    await tester.tap(find.text('Listas'));
+    await tester.tap(find.text('Lists'));
     await tester.pumpAndSettle();
     await tester.enterText(find.byType(TextField), 'Chá');
-    await tester.tap(find.text('Adicionar'));
+    await tester.tap(find.text('Add'));
     await tester.pumpAndSettle();
     await tester.enterText(find.byType(TextField), 'Café');
-    await tester.tap(find.text('Adicionar'));
+    await tester.tap(find.text('Add'));
     await tester.pumpAndSettle();
-    await tester.tap(find.text('Escolher por mim'));
+    await tester.tap(find.text('Choose for me'));
     await tester.pumpAndSettle();
 
     expect(find.text('Café'), findsWidgets);
@@ -158,14 +158,14 @@ void main() {
       ),
     );
     await tester.pumpAndSettle();
-    await tester.tap(find.text('Sobre mim'));
+    await tester.tap(find.text('About me'));
     await tester.pumpAndSettle();
 
     expect(find.byType(AppBar), findsNothing);
     expect(find.text('Vitor Hugo'), findsOneWidget);
     expect(find.text('@vitorhugo-java'), findsOneWidget);
-    expect(find.text('Adicionar moeda'), findsOneWidget);
-    expect(find.text('Adicionar d20'), findsOneWidget);
+    expect(find.text('Add coin'), findsOneWidget);
+    expect(find.text('Add d20'), findsOneWidget);
     expect(githubService.usernames, ['vitorhugo-java']);
   });
 
@@ -201,6 +201,40 @@ void main() {
 
     expect(find.text('Total: 17'), findsOneWidget);
     expect(randomService.requests, [(1, 1, 20)]);
+  });
+
+  testWidgets('app shows portuguese labels for pt-BR locale', (
+    WidgetTester tester,
+  ) async {
+    tester.binding.platformDispatcher.localesTestValue = const [Locale('pt')];
+    addTearDown(tester.binding.platformDispatcher.clearLocalesTestValue);
+
+    await tester.pumpWidget(
+      ProviderScope(
+        overrides: [
+          randomOrgServiceProvider.overrideWith(
+            (ref) => _FakeRandomOrgService(const []),
+          ),
+          githubProfileServiceProvider.overrideWith(
+            (ref) => _FakeGitHubProfileService(
+              const GitHubProfile(
+                login: 'vitorhugo-java',
+                avatarUrl: '',
+                name: 'Vitor Hugo',
+              ),
+            ),
+          ),
+          quickAccessServiceProvider.overrideWith(
+            (ref) => _FakeQuickAccessService(),
+          ),
+        ],
+        child: const UniverseDecidesApp(),
+      ),
+    );
+    await tester.pumpAndSettle();
+
+    expect(find.text('Moeda'), findsWidgets);
+    expect(find.text('Sobre mim'), findsOneWidget);
   });
 }
 

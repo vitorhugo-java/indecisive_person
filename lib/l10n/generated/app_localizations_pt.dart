@@ -1,0 +1,147 @@
+// ignore: unused_import
+import 'package:intl/intl.dart' as intl;
+import 'app_localizations.dart';
+
+// ignore_for_file: type=lint
+
+/// The translations for Portuguese (`pt`).
+class AppLocalizationsPt extends AppLocalizations {
+  AppLocalizationsPt([String locale = 'pt']) : super(locale);
+
+  @override
+  String get appTitle => 'The Universe Decides';
+
+  @override
+  String get navCoin => 'Moeda';
+
+  @override
+  String get navDice => 'Dados';
+
+  @override
+  String get navLists => 'Listas';
+
+  @override
+  String get navAboutMe => 'Sobre mim';
+
+  @override
+  String get coinSubtitle =>
+      'Uma moeda encantada que consulta o Random.org e cai de volta no acaso local quando necessario.';
+
+  @override
+  String get coinHeads => 'CARA';
+
+  @override
+  String get coinTails => 'COROA';
+
+  @override
+  String get coinPrompt => 'Entregue a decisao ao universo';
+
+  @override
+  String get coinTapPrompt => 'Toque para descobrir o veredito.';
+
+  @override
+  String get coinResolved => 'O universo escolheu o seu lado.';
+
+  @override
+  String get coinButton => 'Lancar a moeda';
+
+  @override
+  String get diceSubtitle =>
+      'Role seus dados de RPG com multiplos lados e deixe o destino somar o resultado final.';
+
+  @override
+  String get diceCount => 'Quantidade de dados';
+
+  @override
+  String get diceSides => 'Lados do dado';
+
+  @override
+  String get diceRollButton => 'Rolar os dados';
+
+  @override
+  String get diceEmptyState =>
+      'Escolha a combinacao e role para ver cada valor e a soma final.';
+
+  @override
+  String get diceResults => 'Resultados';
+
+  @override
+  String diceTotal(int total) {
+    return 'Total: $total';
+  }
+
+  @override
+  String get listSubtitle =>
+      'Escreva possibilidades, convide o universo e destaque um unico destino para a sua proxima decisao.';
+
+  @override
+  String get listAddOptionLabel => 'Adicionar opcao';
+
+  @override
+  String get listAddOptionHint => 'Ex.: Viajar, dormir, pedir pizza...';
+
+  @override
+  String get listAddButton => 'Adicionar';
+
+  @override
+  String get listChooseButton => 'Escolher por mim';
+
+  @override
+  String get listEmptyState =>
+      'Adicione itens a lista para deixar a escolha nas maos do universo.';
+
+  @override
+  String get listChosenByUniverse => 'Escolhido pelo universo';
+
+  @override
+  String get aboutSubtitle =>
+      'Um cantinho com o perfil do criador, puxando o avatar direto da API do GitHub.';
+
+  @override
+  String get aboutProfileLoadError =>
+      'Nao foi possivel carregar o perfil agora.';
+
+  @override
+  String get aboutRetryButton => 'Tentar novamente';
+
+  @override
+  String get aboutQuickAccessTitle => 'Acesso rapido no painel';
+
+  @override
+  String get aboutQuickAccessDescription =>
+      'Adicione atalhos da moeda e do d20 ao painel rapido do Android para abrir o app e executar a acao direto.';
+
+  @override
+  String get aboutAddCoinButton => 'Adicionar moeda';
+
+  @override
+  String get aboutAddDiceButton => 'Adicionar d20';
+
+  @override
+  String get quickTileCoinAdded => 'Atalho da moeda adicionado ao painel.';
+
+  @override
+  String get quickTileCoinAlreadyAdded =>
+      'O atalho da moeda ja estava no painel.';
+
+  @override
+  String get quickTileCoinCancelled => 'Adicao da moeda cancelada.';
+
+  @override
+  String get quickTileCoinUnsupported =>
+      'Seu Android nao permite pedir esse atalho pelo app.';
+
+  @override
+  String get quickTileDiceAdded => 'Atalho do d20 adicionado ao painel.';
+
+  @override
+  String get quickTileDiceAlreadyAdded =>
+      'O atalho do d20 ja estava no painel.';
+
+  @override
+  String get quickTileDiceCancelled => 'Adicao do d20 cancelada.';
+
+  @override
+  String get quickTileDiceUnsupported =>
+      'Seu Android nao permite pedir esse atalho pelo app.';
+}
