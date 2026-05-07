@@ -5,10 +5,12 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:theuniversedecides/l10n/generated/app_localizations.dart';
 import 'package:theuniversedecides/services/quick_access_service.dart';
+import 'package:theuniversedecides/services/random_org_service.dart';
 import 'package:theuniversedecides/screens/about_me_screen.dart';
 import 'package:theuniversedecides/screens/coin_flip_screen.dart';
 import 'package:theuniversedecides/screens/dice_roll_screen.dart';
 import 'package:theuniversedecides/screens/list_picker_screen.dart';
+import 'package:theuniversedecides/widgets/snack_bar_custom.dart';
 
 class MainScreen extends ConsumerStatefulWidget {
   const MainScreen({super.key});
@@ -20,6 +22,8 @@ class MainScreen extends ConsumerStatefulWidget {
 class _MainScreenState extends ConsumerState<MainScreen> {
   int _selectedIndex = 0;
   late final StreamSubscription<QuickAccessAction> _quickAccessSubscription;
+  late final StreamSubscription<RandomOrgFallbackEvent>
+  _randomOrgFallbackSubscription;
 
   static const _screens = [
     CoinFlipScreen(),
@@ -32,9 +36,28 @@ class _MainScreenState extends ConsumerState<MainScreen> {
   void initState() {
     super.initState();
     final quickAccessService = ref.read(quickAccessServiceProvider);
+    final randomOrgService = ref.read(randomOrgServiceProvider);
     _quickAccessSubscription = quickAccessService.actions.listen(
       _handleQuickAccessAction,
     );
+    _randomOrgFallbackSubscription = randomOrgService.fallbackEvents.listen((
+      _,
+    ) {
+      if (!mounted) {
+        return;
+      }
+
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        if (!mounted) {
+          return;
+        }
+
+        SnackBarCustom.buildErrorMessage(
+          AppLocalizations.of(context)!.randomOrgFallbackNotice,
+          context: context,
+        );
+      });
+    });
     _loadInitialQuickAccessAction(quickAccessService);
   }
 
@@ -75,6 +98,7 @@ class _MainScreenState extends ConsumerState<MainScreen> {
   @override
   void dispose() {
     _quickAccessSubscription.cancel();
+    _randomOrgFallbackSubscription.cancel();
     super.dispose();
   }
 

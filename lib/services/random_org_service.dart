@@ -20,6 +20,11 @@ class RandomOrgService {
 
   final http.Client _client;
   final math.Random _random;
+  final StreamController<RandomOrgFallbackEvent> _fallbackController =
+      StreamController<RandomOrgFallbackEvent>.broadcast();
+
+  Stream<RandomOrgFallbackEvent> get fallbackEvents =>
+      _fallbackController.stream;
 
   Future<List<int>> fetchIntegers({
     required int count,
@@ -51,6 +56,7 @@ class RandomOrgService {
       // Keep the wait short so the UI can fall back quickly on slow networks.
       final response = await _client.get(uri).timeout(_randomOrgTimeout);
       if (response.statusCode != 200) {
+        _reportFallback();
         return fallback;
       }
 
@@ -64,18 +70,32 @@ class RandomOrgService {
 
       // Unexpected payloads should feel the same as offline mode to callers.
       if (values.length != count) {
+        _reportFallback();
         return fallback;
       }
 
       return values;
     } on TimeoutException {
+      _reportFallback();
       return fallback;
     } catch (_) {
+      _reportFallback();
       return fallback;
     }
   }
 
+  void _reportFallback() {
+    if (!_fallbackController.isClosed) {
+      _fallbackController.add(const RandomOrgFallbackEvent());
+    }
+  }
+
   void dispose() {
+    _fallbackController.close();
     _client.close();
   }
+}
+
+class RandomOrgFallbackEvent {
+  const RandomOrgFallbackEvent();
 }

@@ -9,6 +9,10 @@ abstract final class AppColors {
   static const snackBarBackground = Color(0xFF20172F);
   static const inputFill = Color(0xFF171124);
   static const panelBackground = Color(0xFF1A1327);
+  static const acrylicSurface = Color(0xC9191327);
+  static const acrylicSurfaceStrong = Color(0xD933224D);
+  static const acrylicBorder = Color(0x59FFFFFF);
+  static const acrylicAccent = Color(0xCC7A4FFF);
 
   static const backgroundGradientMiddle = Color(0xFF12091E);
   static const heroGradientStart = Color(0xFF2E1D55);

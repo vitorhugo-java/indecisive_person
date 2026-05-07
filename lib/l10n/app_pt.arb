@@ -47,5 +47,6 @@
   "quickTileDiceAdded": "Atalho do d20 adicionado ao painel.",
   "quickTileDiceAlreadyAdded": "O atalho do d20 ja estava no painel.",
   "quickTileDiceCancelled": "Adicao do d20 cancelada.",
-  "quickTileDiceUnsupported": "Seu Android nao permite pedir esse atalho pelo app."
+  "quickTileDiceUnsupported": "Seu Android nao permite pedir esse atalho pelo app.",
+  "randomOrgFallbackNotice": "Random.org indisponivel. Usando aleatoriedade local."
 }

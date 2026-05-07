@@ -47,5 +47,6 @@
   "quickTileDiceAdded": "d20 shortcut added to the panel.",
   "quickTileDiceAlreadyAdded": "The d20 shortcut is already in the panel.",
   "quickTileDiceCancelled": "d20 shortcut request cancelled.",
-  "quickTileDiceUnsupported": "Your Android version cannot add this shortcut from the app."
+  "quickTileDiceUnsupported": "Your Android version cannot add this shortcut from the app.",
+  "randomOrgFallbackNotice": "Random.org is unavailable. Using local randomness."
 }

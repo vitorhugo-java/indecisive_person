@@ -343,6 +343,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Your Android version cannot add this shortcut from the app.'**
   String get quickTileDiceUnsupported;
+
+  /// No description provided for @randomOrgFallbackNotice.
+  ///
+  /// In en, this message translates to:
+  /// **'Random.org is unavailable. Using local randomness.'**
+  String get randomOrgFallbackNotice;
 }
 
 class _AppLocalizationsDelegate

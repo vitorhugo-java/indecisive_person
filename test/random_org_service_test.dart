@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:math' as math;
 
 import 'package:flutter_test/flutter_test.dart';
@@ -31,5 +32,22 @@ void main() {
 
     expect(values, hasLength(4));
     expect(values.every((value) => value >= 2 && value <= 4), isTrue);
+  });
+
+  test('fetchIntegers emits a fallback event on failure', () async {
+    final service = RandomOrgService(
+      client: MockClient((_) async => http.Response('oops', 500)),
+      random: math.Random(7),
+    );
+
+    addTearDown(service.dispose);
+
+    final fallbackEvent = service.fallbackEvents.first.timeout(
+      const Duration(seconds: 1),
+    );
+
+    await service.fetchIntegers(count: 1, min: 0, max: 1);
+
+    await expectLater(fallbackEvent, completion(isA<RandomOrgFallbackEvent>()));
   });
 }

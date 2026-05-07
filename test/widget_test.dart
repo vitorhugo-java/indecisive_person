@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:collection';
 import 'dart:math' as math;
 
@@ -236,6 +237,45 @@ void main() {
     expect(find.text('Moeda'), findsWidgets);
     expect(find.text('Sobre mim'), findsOneWidget);
   });
+
+  testWidgets(
+    'app shows acrylic fallback notice when random.org is unavailable',
+    (WidgetTester tester) async {
+      final randomService = _FakeRandomOrgService(const []);
+
+      await tester.pumpWidget(
+        ProviderScope(
+          overrides: [
+            randomOrgServiceProvider.overrideWith((ref) => randomService),
+            githubProfileServiceProvider.overrideWith(
+              (ref) => _FakeGitHubProfileService(
+                const GitHubProfile(
+                  login: 'vitorhugo-java',
+                  avatarUrl: '',
+                  name: 'Vitor Hugo',
+                ),
+              ),
+            ),
+            quickAccessServiceProvider.overrideWith(
+              (ref) => _FakeQuickAccessService(),
+            ),
+          ],
+          child: const UniverseDecidesApp(),
+        ),
+      );
+      await tester.pumpAndSettle();
+
+      randomService.emitFallbackNotice();
+      await tester.pump();
+      await tester.pump();
+      await tester.pump(const Duration(milliseconds: 250));
+
+      expect(
+        find.text('Random.org is unavailable. Using local randomness.'),
+        findsOneWidget,
+      );
+    },
+  );
 }
 
 class _FakeRandomOrgService extends RandomOrgService {
@@ -248,6 +288,12 @@ class _FakeRandomOrgService extends RandomOrgService {
 
   final Queue<List<int>> _responses;
   final List<(int, int, int)> requests = [];
+  final StreamController<RandomOrgFallbackEvent> _fallbackController =
+      StreamController<RandomOrgFallbackEvent>.broadcast();
+
+  @override
+  Stream<RandomOrgFallbackEvent> get fallbackEvents =>
+      _fallbackController.stream;
 
   @override
   Future<List<int>> fetchIntegers({
@@ -259,8 +305,14 @@ class _FakeRandomOrgService extends RandomOrgService {
     return _responses.isEmpty ? const [] : _responses.removeFirst();
   }
 
+  void emitFallbackNotice() {
+    _fallbackController.add(const RandomOrgFallbackEvent());
+  }
+
   @override
-  void dispose() {}
+  void dispose() {
+    _fallbackController.close();
+  }
 }
 
 class _FakeGitHubProfileService extends GitHubProfileService {

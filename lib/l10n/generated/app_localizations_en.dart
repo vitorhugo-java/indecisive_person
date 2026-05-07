@@ -143,4 +143,8 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get quickTileDiceUnsupported =>
       'Your Android version cannot add this shortcut from the app.';
+
+  @override
+  String get randomOrgFallbackNotice =>
+      'Random.org is unavailable. Using local randomness.';
 }

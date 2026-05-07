@@ -144,4 +144,8 @@ class AppLocalizationsPt extends AppLocalizations {
   @override
   String get quickTileDiceUnsupported =>
       'Seu Android nao permite pedir esse atalho pelo app.';
+
+  @override
+  String get randomOrgFallbackNotice =>
+      'Random.org indisponivel. Usando aleatoriedade local.';
 }
