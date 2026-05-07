@@ -138,7 +138,7 @@ class _CoinFlipScreenState extends ConsumerState<CoinFlipScreen>
                   const SizedBox(height: 20),
                   FilledButton.icon(
                     onPressed: state.isLoading ? null : _flipCoin,
-                    icon: const Icon(Icons.cyclone),
+                    icon: const Icon(Icons.monetization_on),
                     label: Text(l10n.coinButton),
                   ),
                 ],

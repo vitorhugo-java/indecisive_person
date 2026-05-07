@@ -113,8 +113,8 @@ class _MainScreenState extends ConsumerState<MainScreen> {
         },
         destinations: [
           NavigationDestination(
-            icon: const Icon(Icons.brightness_3_outlined),
-            selectedIcon: const Icon(Icons.brightness_2),
+            icon: const Icon(Icons.monetization_on_outlined),
+            selectedIcon: const Icon(Icons.monetization_on),
             label: l10n.navCoin,
           ),
           NavigationDestination(

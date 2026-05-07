@@ -101,7 +101,8 @@ public class MainActivity extends FlutterActivity {
 
         ComponentName componentName = getTileComponentName(action);
         int labelResId = getTileLabelResId(action);
-        if (componentName == null || labelResId == 0) {
+        int iconResId = getTileIconResId(action);
+        if (componentName == null || labelResId == 0 || iconResId == 0) {
             result.error("invalid_action", "Unsupported quick access action.", null);
             return;
         }
@@ -115,7 +116,7 @@ public class MainActivity extends FlutterActivity {
         statusBarManager.requestAddTileService(
                 componentName,
                 getString(labelResId),
-                Icon.createWithResource(this, R.mipmap.ic_launcher),
+                Icon.createWithResource(this, iconResId),
                 getMainExecutor(),
                 addTileResult -> result.success(mapTileResult(addTileResult))
         );
@@ -137,6 +138,16 @@ public class MainActivity extends FlutterActivity {
         }
         if (QuickAccessContract.ACTION_DICE.equals(action)) {
             return R.string.quick_tile_dice_label;
+        }
+        return 0;
+    }
+
+    private int getTileIconResId(String action) {
+        if (QuickAccessContract.ACTION_COIN.equals(action)) {
+            return R.drawable.ic_quick_tile_coin;
+        }
+        if (QuickAccessContract.ACTION_DICE.equals(action)) {
+            return R.drawable.ic_quick_tile_dice;
         }
         return 0;
     }

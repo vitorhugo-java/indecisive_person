@@ -47,7 +47,7 @@ void main() {
         child: const UniverseDecidesApp(),
       ),
     );
-    await tester.tap(find.text('Flip coin'));
+    await tester.tap(find.text('Flip a coin'));
     await tester.pumpAndSettle();
 
     expect(find.text('TAILS'), findsWidgets);
@@ -167,6 +167,8 @@ void main() {
     expect(find.text('@vitorhugo-java'), findsOneWidget);
     expect(find.text('Add coin'), findsOneWidget);
     expect(find.text('Add d20'), findsOneWidget);
+    expect(find.byIcon(Icons.monetization_on), findsOneWidget);
+    expect(find.byIcon(Icons.casino), findsOneWidget);
     expect(githubService.usernames, ['vitorhugo-java']);
   });
 
@@ -235,7 +237,43 @@ void main() {
     await tester.pumpAndSettle();
 
     expect(find.text('Moeda'), findsWidgets);
+    expect(find.text('Jogar uma moeda'), findsOneWidget);
     expect(find.text('Sobre mim'), findsOneWidget);
+  });
+
+  testWidgets('app shows english labels for en locale', (
+    WidgetTester tester,
+  ) async {
+    tester.binding.platformDispatcher.localesTestValue = const [Locale('en')];
+    addTearDown(tester.binding.platformDispatcher.clearLocalesTestValue);
+
+    await tester.pumpWidget(
+      ProviderScope(
+        overrides: [
+          randomOrgServiceProvider.overrideWith(
+            (ref) => _FakeRandomOrgService(const []),
+          ),
+          githubProfileServiceProvider.overrideWith(
+            (ref) => _FakeGitHubProfileService(
+              const GitHubProfile(
+                login: 'vitorhugo-java',
+                avatarUrl: '',
+                name: 'Vitor Hugo',
+              ),
+            ),
+          ),
+          quickAccessServiceProvider.overrideWith(
+            (ref) => _FakeQuickAccessService(),
+          ),
+        ],
+        child: const UniverseDecidesApp(),
+      ),
+    );
+    await tester.pumpAndSettle();
+
+    expect(find.text('Coin'), findsWidgets);
+    expect(find.text('Flip a coin'), findsOneWidget);
+    expect(find.text('About me'), findsOneWidget);
   });
 
   testWidgets(

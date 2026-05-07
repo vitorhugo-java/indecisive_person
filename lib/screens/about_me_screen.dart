@@ -175,7 +175,7 @@ class _AboutMeScreenState extends ConsumerState<AboutMeScreen> {
                     children: [
                       FilledButton.icon(
                         onPressed: () => _requestTile(QuickAccessAction.coin),
-                        icon: const Icon(Icons.brightness_2),
+                        icon: const Icon(Icons.monetization_on),
                         label: Text(l10n.aboutAddCoinButton),
                       ),
                       FilledButton.icon(

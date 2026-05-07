@@ -29,7 +29,7 @@
         <service
             android:name=".CoinQuickTileService"
             android:exported="true"
-            android:icon="@mipmap/ic_launcher"
+            android:icon="@drawable/ic_quick_tile_coin"
             android:label="@string/quick_tile_coin_label"
             android:permission="android.permission.BIND_QUICK_SETTINGS_TILE">
             <intent-filter>
@@ -39,7 +39,7 @@
         <service
             android:name=".DiceQuickTileService"
             android:exported="true"
-            android:icon="@mipmap/ic_launcher"
+            android:icon="@drawable/ic_quick_tile_dice"
             android:label="@string/quick_tile_dice_label"
             android:permission="android.permission.BIND_QUICK_SETTINGS_TILE">
             <intent-filter>

@@ -167,7 +167,7 @@ abstract class AppLocalizations {
   /// No description provided for @coinButton.
   ///
   /// In en, this message translates to:
-  /// **'Flip coin'**
+  /// **'Flip a coin'**
   String get coinButton;
 
   /// No description provided for @diceSubtitle.

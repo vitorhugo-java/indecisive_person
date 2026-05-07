@@ -43,7 +43,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get coinResolved => 'The universe chose your side.';
 
   @override
-  String get coinButton => 'Flip coin';
+  String get coinButton => 'Flip a coin';
 
   @override
   String get diceSubtitle =>
