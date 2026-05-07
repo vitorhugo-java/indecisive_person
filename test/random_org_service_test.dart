@@ -8,9 +8,7 @@ import 'package:theuniversedecides/services/random_org_service.dart';
 void main() {
   test('fetchIntegers parses Random.org responses', () async {
     final service = RandomOrgService(
-      client: MockClient(
-        (_) async => http.Response('1\n3\n5\n', 200),
-      ),
+      client: MockClient((_) async => http.Response('1\n3\n5\n', 200)),
       random: math.Random(7),
     );
 

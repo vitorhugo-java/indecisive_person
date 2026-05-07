@@ -2,8 +2,9 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:theuniversedecides/services/random_org_service.dart';
 
-final diceRollProvider =
-    NotifierProvider<DiceRollController, DiceRollState>(DiceRollController.new);
+final diceRollProvider = NotifierProvider<DiceRollController, DiceRollState>(
+  DiceRollController.new,
+);
 
 class DiceRollState {
   const DiceRollState({

@@ -75,3 +75,4 @@ Thumbs.db
 /.antigravity
 /.aiox-core
 .env.example
+/.tmp

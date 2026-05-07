@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import 'package:theuniversedecides/screens/about_me_screen.dart';
 import 'package:theuniversedecides/screens/coin_flip_screen.dart';
 import 'package:theuniversedecides/screens/dice_roll_screen.dart';
 import 'package:theuniversedecides/screens/list_picker_screen.dart';
@@ -18,20 +19,14 @@ class _MainScreenState extends State<MainScreen> {
     CoinFlipScreen(),
     DiceRollScreen(),
     ListPickerScreen(),
+    AboutMeScreen(),
   ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('The Universe Decides'),
-        centerTitle: false,
-      ),
       body: SafeArea(
-        child: IndexedStack(
-          index: _selectedIndex,
-          children: _screens,
-        ),
+        child: IndexedStack(index: _selectedIndex, children: _screens),
       ),
       bottomNavigationBar: NavigationBar(
         selectedIndex: _selectedIndex,
@@ -55,6 +50,11 @@ class _MainScreenState extends State<MainScreen> {
             icon: Icon(Icons.auto_awesome_outlined),
             selectedIcon: Icon(Icons.auto_awesome),
             label: 'Listas',
+          ),
+          NavigationDestination(
+            icon: Icon(Icons.person_outline),
+            selectedIcon: Icon(Icons.person),
+            label: 'Sobre mim',
           ),
         ],
       ),

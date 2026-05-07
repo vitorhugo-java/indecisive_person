@@ -141,7 +141,8 @@ class DiceRollScreen extends ConsumerWidget {
                                         style: theme.textTheme.headlineMedium
                                             ?.copyWith(
                                               fontWeight: FontWeight.w900,
-                                              color: theme.colorScheme
+                                              color: theme
+                                                  .colorScheme
                                                   .onPrimaryContainer,
                                             ),
                                       ),

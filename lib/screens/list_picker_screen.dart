@@ -113,14 +113,13 @@ class _ListPickerScreenState extends ConsumerState<ListPickerScreen> {
                                     ),
                                   ),
                                   child: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: [
                                       Text(
                                         'Escolhido pelo universo',
                                         style: theme.textTheme.labelLarge
-                                            ?.copyWith(
-                                              color: Colors.white70,
-                                            ),
+                                            ?.copyWith(color: Colors.white70),
                                       ),
                                       const SizedBox(height: 8),
                                       Text(
@@ -143,7 +142,8 @@ class _ListPickerScreenState extends ConsumerState<ListPickerScreen> {
                                 separatorBuilder: (_, _) =>
                                     const SizedBox(height: 10),
                                 itemBuilder: (context, index) {
-                                  final isSelected = state.selectedIndex == index;
+                                  final isSelected =
+                                      state.selectedIndex == index;
                                   return AnimatedContainer(
                                     duration: const Duration(milliseconds: 220),
                                     decoration: BoxDecoration(
@@ -155,14 +155,16 @@ class _ListPickerScreenState extends ConsumerState<ListPickerScreen> {
                                         color: isSelected
                                             ? theme.colorScheme.primary
                                             : theme.colorScheme.outline
-                                                  .withOpacity(0.15),
+                                                  .withValues(alpha: 0.15),
                                       ),
                                     ),
                                     child: ListTile(
                                       leading: CircleAvatar(
                                         backgroundColor: isSelected
                                             ? theme.colorScheme.primary
-                                            : theme.colorScheme.surfaceVariant,
+                                            : theme
+                                                  .colorScheme
+                                                  .surfaceContainerHighest,
                                         child: Text('${index + 1}'),
                                       ),
                                       title: Text(
@@ -172,13 +174,15 @@ class _ListPickerScreenState extends ConsumerState<ListPickerScreen> {
                                               ? FontWeight.w800
                                               : FontWeight.w500,
                                           color: isSelected
-                                              ? theme.colorScheme
+                                              ? theme
+                                                    .colorScheme
                                                     .onPrimaryContainer
                                               : null,
                                         ),
                                       ),
                                       trailing: IconButton(
-                                        onPressed: () => controller.removeItem(index),
+                                        onPressed: () =>
+                                            controller.removeItem(index),
                                         icon: const Icon(Icons.close),
                                       ),
                                     ),

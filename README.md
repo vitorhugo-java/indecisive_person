@@ -31,7 +31,7 @@ When `android/key.properties` is present, release builds use that keystore autom
 
 ## GitHub Actions signed APK workflow
 
-The repository includes `.github/workflows/build-signed-apk.yml` to generate a signed Android APK, upload it as a workflow artifact, and publish it to this repository's GitHub Releases.
+The repository includes `.github/workflows/build-signed-apk.yml` to generate signed Android release APKs, upload them as workflow artifacts, and publish them to this repository's GitHub Releases.
 
 Configure these repository secrets before running the workflow:
 
@@ -46,10 +46,17 @@ Example command to prepare the keystore secret value:
 base64 -w 0 android/upload-keystore.jks
 ```
 
+Each workflow run now produces:
+
+- `app-release.apk` as the universal fat APK
+- `app-armeabi-v7a-release.apk` for 32-bit ARM devices
+- `app-arm64-v8a-release.apk` for 64-bit ARM devices
+- `app-x86_64-release.apk` for x86_64 devices and emulators
+
 After the secrets are configured, you can:
 
-- push a tag such as `v1.0.0` to build the APK and publish it to the matching GitHub Release
-- run the workflow manually and provide a `release_tag` value so the workflow creates or updates that GitHub Release before attaching the APK
+- push a tag such as `v1.0.0` to build all APK variants and publish them to the matching GitHub Release
+- run the workflow manually and provide a `release_tag` value so the workflow creates or updates that GitHub Release before attaching all APK variants
 
 ## Icon workflow
 

@@ -86,9 +86,12 @@ class _CoinFlipScreenState extends ConsumerState<CoinFlipScreen>
                             alignment: Alignment.center,
                             transform: Matrix4.identity()
                               ..setEntry(3, 2, 0.002)
-                              ..rotateX(state.isLoading
-                                  ? math.sin(_controller.value * math.pi) * 0.18
-                                  : 0.0)
+                              ..rotateX(
+                                state.isLoading
+                                    ? math.sin(_controller.value * math.pi) *
+                                          0.18
+                                    : 0.0,
+                              )
                               ..rotateY(spin),
                             child: _CoinFace(value: faceValue),
                           );
@@ -177,13 +180,13 @@ class _CoinFace extends StatelessWidget {
             Icon(
               isCara ? Icons.wb_sunny_rounded : Icons.nightlight_round,
               size: 44,
-              color: Colors.black.withOpacity(0.75),
+              color: Colors.black.withValues(alpha: 0.75),
             ),
             const SizedBox(height: 12),
             Text(
               isCara ? 'CARA' : 'COROA',
               style: theme.textTheme.titleLarge?.copyWith(
-                color: Colors.black.withOpacity(0.82),
+                color: Colors.black.withValues(alpha: 0.82),
                 fontWeight: FontWeight.w900,
                 letterSpacing: 1.5,
               ),

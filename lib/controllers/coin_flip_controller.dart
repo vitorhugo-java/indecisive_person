@@ -4,8 +4,9 @@ import 'package:theuniversedecides/services/random_org_service.dart';
 
 const _unset = Object();
 
-final coinFlipProvider =
-    NotifierProvider<CoinFlipController, CoinFlipState>(CoinFlipController.new);
+final coinFlipProvider = NotifierProvider<CoinFlipController, CoinFlipState>(
+  CoinFlipController.new,
+);
 
 class CoinFlipState {
   const CoinFlipState({this.result, this.isLoading = false});
@@ -36,7 +37,11 @@ class CoinFlipController extends Notifier<CoinFlipState> {
     }
 
     state = state.copyWith(isLoading: true);
-    final values = await _randomOrgService.fetchIntegers(count: 1, min: 0, max: 1);
+    final values = await _randomOrgService.fetchIntegers(
+      count: 1,
+      min: 0,
+      max: 1,
+    );
     state = state.copyWith(
       isLoading: false,
       result: values.isEmpty ? 0 : values.first,

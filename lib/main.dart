@@ -30,15 +30,15 @@ class UniverseDecidesApp extends StatelessWidget {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(24),
             side: BorderSide(
-              color: colorScheme.outline.withOpacity(0.22),
+              color: colorScheme.outline.withValues(alpha: 0.22),
             ),
           ),
         ),
         navigationBarTheme: NavigationBarThemeData(
           backgroundColor: const Color(0xFF120C1C),
-          indicatorColor: colorScheme.primary.withOpacity(0.22),
-          labelTextStyle: MaterialStateProperty.resolveWith((states) {
-            final isSelected = states.contains(MaterialState.selected);
+          indicatorColor: colorScheme.primary.withValues(alpha: 0.22),
+          labelTextStyle: WidgetStateProperty.resolveWith((states) {
+            final isSelected = states.contains(WidgetState.selected);
             return TextStyle(
               color: isSelected
                   ? colorScheme.onSurface
@@ -68,7 +68,7 @@ class UniverseDecidesApp extends StatelessWidget {
           enabledBorder: OutlineInputBorder(
             borderRadius: BorderRadius.circular(18),
             borderSide: BorderSide(
-              color: colorScheme.outline.withOpacity(0.18),
+              color: colorScheme.outline.withValues(alpha: 0.18),
             ),
           ),
           focusedBorder: OutlineInputBorder(
