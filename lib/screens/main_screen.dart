@@ -47,16 +47,10 @@ class _MainScreenState extends ConsumerState<MainScreen> {
         return;
       }
 
-      WidgetsBinding.instance.addPostFrameCallback((_) {
-        if (!mounted) {
-          return;
-        }
-
-        SnackBarCustom.buildErrorMessage(
-          AppLocalizations.of(context)!.randomOrgFallbackNotice,
-          context: context,
-        );
-      });
+      SnackBarCustom.buildErrorMessage(
+        AppLocalizations.of(context)!.randomOrgFallbackNotice,
+        context: context,
+      );
     });
     _loadInitialQuickAccessAction(quickAccessService);
   }
