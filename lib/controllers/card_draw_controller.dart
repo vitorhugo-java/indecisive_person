@@ -33,7 +33,7 @@ class PlayingCard {
   });
 
   factory PlayingCard.fromNumber(int value) {
-    final normalized = value.clamp(1, 52) as int;
+    final normalized = value.clamp(1, 52);
     final zeroBased = normalized - 1;
 
     return PlayingCard(
