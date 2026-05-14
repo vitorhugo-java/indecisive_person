@@ -116,6 +116,12 @@ abstract class AppLocalizations {
   /// **'Dice'**
   String get navDice;
 
+  /// No description provided for @navCards.
+  ///
+  /// In en, this message translates to:
+  /// **'Cards'**
+  String get navCards;
+
   /// No description provided for @navLists.
   ///
   /// In en, this message translates to:
@@ -211,6 +217,36 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Total: {total}'**
   String diceTotal(int total);
+
+  /// No description provided for @cardDrawSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Draw a true-random playing card and let the universe reveal a modern tarot-free sign from a full 52-card deck.'**
+  String get cardDrawSubtitle;
+
+  /// No description provided for @cardDrawPrompt.
+  ///
+  /// In en, this message translates to:
+  /// **'Draw a card from the cosmic deck'**
+  String get cardDrawPrompt;
+
+  /// No description provided for @cardDrawTapPrompt.
+  ///
+  /// In en, this message translates to:
+  /// **'Tap below to reveal your next card.'**
+  String get cardDrawTapPrompt;
+
+  /// No description provided for @cardDrawResolved.
+  ///
+  /// In en, this message translates to:
+  /// **'The universe has revealed your card.'**
+  String get cardDrawResolved;
+
+  /// No description provided for @cardDrawButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Draw a card'**
+  String get cardDrawButton;
 
   /// No description provided for @listSubtitle.
   ///

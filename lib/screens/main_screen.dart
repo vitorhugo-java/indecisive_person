@@ -7,6 +7,7 @@ import 'package:theuniversedecides/l10n/generated/app_localizations.dart';
 import 'package:theuniversedecides/services/quick_access_service.dart';
 import 'package:theuniversedecides/services/random_org_service.dart';
 import 'package:theuniversedecides/screens/about_me_screen.dart';
+import 'package:theuniversedecides/screens/card_draw_screen.dart';
 import 'package:theuniversedecides/screens/coin_flip_screen.dart';
 import 'package:theuniversedecides/screens/dice_roll_screen.dart';
 import 'package:theuniversedecides/screens/list_picker_screen.dart';
@@ -28,6 +29,7 @@ class _MainScreenState extends ConsumerState<MainScreen> {
   static const _screens = [
     CoinFlipScreen(),
     DiceRollScreen(),
+    CardDrawScreen(),
     ListPickerScreen(),
     AboutMeScreen(),
   ];
@@ -121,6 +123,11 @@ class _MainScreenState extends ConsumerState<MainScreen> {
             icon: const Icon(Icons.casino_outlined),
             selectedIcon: const Icon(Icons.casino),
             label: l10n.navDice,
+          ),
+          NavigationDestination(
+            icon: const Icon(Icons.style_outlined),
+            selectedIcon: const Icon(Icons.style),
+            label: l10n.navCards,
           ),
           NavigationDestination(
             icon: const Icon(Icons.auto_awesome_outlined),

@@ -6,6 +6,7 @@ The Universe Decides is a Flutter decision app with a dark mystical Material 3 i
 
 - Coin flip screen with animated tosses
 - RPG dice roller with configurable quantities and polyhedral sides
+- Card draw screen with a full 52-card deck
 - Custom list picker with highlighted winners
 - Consistent app naming for Android and iOS
 - Unique application identifier: `com.hugo.theuniversedecides`

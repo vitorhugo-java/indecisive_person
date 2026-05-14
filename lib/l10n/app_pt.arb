@@ -3,6 +3,7 @@
   "appTitle": "The Universe Decides",
   "navCoin": "Moeda",
   "navDice": "Dados",
+  "navCards": "Cartas",
   "navLists": "Listas",
   "navAboutMe": "Sobre mim",
   "coinSubtitle": "Uma moeda encantada que consulta o Random.org e cai de volta no acaso local quando necessario.",
@@ -26,6 +27,11 @@
       }
     }
   },
+  "cardDrawSubtitle": "Sorteie uma carta com aleatoriedade real e deixe o universo revelar um sinal moderno em um baralho completo de 52 cartas.",
+  "cardDrawPrompt": "Sorteie uma carta do baralho cosmico",
+  "cardDrawTapPrompt": "Toque abaixo para revelar sua proxima carta.",
+  "cardDrawResolved": "O universo revelou a sua carta.",
+  "cardDrawButton": "Sortear carta",
   "listSubtitle": "Escreva possibilidades, convide o universo e destaque um unico destino para a sua proxima decisao.",
   "listAddOptionLabel": "Adicionar opcao",
   "listAddOptionHint": "Ex.: Viajar, dormir, pedir pizza...",
