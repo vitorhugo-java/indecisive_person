@@ -21,6 +21,9 @@ class AppLocalizationsPt extends AppLocalizations {
   String get navLists => 'Listas';
 
   @override
+  String get navTarot => 'Tarô';
+
+  @override
   String get navAboutMe => 'Sobre mim';
 
   @override
@@ -92,6 +95,31 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get listChosenByUniverse => 'Escolhido pelo universo';
+
+  @override
+  String get tarotSubtitle =>
+      'Compre uma unica carta do baralho completo de 78 cartas e deixe a aleatoriedade real revelar o arquétipo que guia este momento.';
+
+  @override
+  String get tarotPrompt => 'O baralho está esperando';
+
+  @override
+  String get tarotTapPrompt =>
+      'Compre uma carta para revelar o simbolo escolhido pelo universo.';
+
+  @override
+  String get tarotButton => 'Comprar uma carta';
+
+  @override
+  String get tarotMajorArcana => 'Arcano Maior';
+
+  @override
+  String get tarotMinorArcana => 'Arcano Menor';
+
+  @override
+  String tarotDeckPosition(int number) {
+    return 'Carta $number de 78';
+  }
 
   @override
   String get aboutSubtitle =>

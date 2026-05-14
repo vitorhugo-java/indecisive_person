@@ -4,6 +4,7 @@
   "navCoin": "Coin",
   "navDice": "Dice",
   "navLists": "Lists",
+  "navTarot": "Tarot",
   "navAboutMe": "About me",
   "coinSubtitle": "An enchanted coin that checks Random.org and falls back to local randomness whenever needed.",
   "coinHeads": "HEADS",
@@ -33,6 +34,20 @@
   "listChooseButton": "Choose for me",
   "listEmptyState": "Add items to the list and let the universe decide for you.",
   "listChosenByUniverse": "Chosen by the universe",
+  "tarotSubtitle": "Draw a single Tarot card from the full 78-card deck and let true randomness reveal the archetype guiding this moment.",
+  "tarotPrompt": "The deck is waiting",
+  "tarotTapPrompt": "Draw a card to reveal the universe's symbol.",
+  "tarotButton": "Draw a card",
+  "tarotMajorArcana": "Major Arcana",
+  "tarotMinorArcana": "Minor Arcana",
+  "tarotDeckPosition": "Card {number} of 78",
+  "@tarotDeckPosition": {
+    "placeholders": {
+      "number": {
+        "type": "int"
+      }
+    }
+  },
   "aboutSubtitle": "A small corner with the creator profile, loading the avatar straight from the GitHub API.",
   "aboutProfileLoadError": "Could not load the profile right now.",
   "aboutRetryButton": "Try again",
