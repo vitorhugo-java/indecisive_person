@@ -28,7 +28,7 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get coinSubtitle =>
-      'Uma moeda encantada que consulta o Random.org e cai de volta no acaso local quando necessario.';
+      'Uma moeda encantada que consulta o Random.org e cai de volta no acaso local quando necessário.';
 
   @override
   String get coinHeads => 'CARA';
