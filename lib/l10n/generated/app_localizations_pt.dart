@@ -28,7 +28,7 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get coinSubtitle =>
-      'Uma moeda encantada que consulta o Random.org e cai de volta no acaso local quando necessario.';
+      'Uma moeda encantada que consulta o Random.org e cai de volta no acaso local quando necessário.';
 
   @override
   String get coinHeads => 'CARA';
@@ -91,7 +91,7 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get listEmptyState =>
-      'Adicione itens a lista para deixar a escolha nas maos do universo.';
+      'Adicione itens a lista para deixar a escolha nas mãos do universo.';
 
   @override
   String get listChosenByUniverse => 'Escolhido pelo universo';
@@ -127,7 +127,7 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get aboutProfileLoadError =>
-      'Nao foi possivel carregar o perfil agora.';
+      'Não foi possível carregar o perfil agora.';
 
   @override
   String get aboutRetryButton => 'Tentar novamente';
