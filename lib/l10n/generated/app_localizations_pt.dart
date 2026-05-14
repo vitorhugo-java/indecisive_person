@@ -18,6 +18,9 @@ class AppLocalizationsPt extends AppLocalizations {
   String get navDice => 'Dados';
 
   @override
+  String get navCards => 'Cartas';
+
+  @override
   String get navLists => 'Listas';
 
   @override
@@ -25,7 +28,7 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get coinSubtitle =>
-      'Uma moeda encantada que consulta o Random.org e cai de volta no acaso local quando necessario.';
+      'Uma moeda encantada que consulta o Random.org e cai de volta no acaso local quando necessário.';
 
   @override
   String get coinHeads => 'CARA';
@@ -69,6 +72,23 @@ class AppLocalizationsPt extends AppLocalizations {
   String diceTotal(int total) {
     return 'Total: $total';
   }
+
+  @override
+  String get cardDrawSubtitle =>
+      'Sorteie uma carta com aleatoriedade real e deixe o universo revelar um sinal moderno em um baralho completo de 52 cartas.';
+
+  @override
+  String get cardDrawPrompt => 'Sorteie uma carta do baralho cósmico';
+
+  @override
+  String get cardDrawTapPrompt =>
+      'Toque abaixo para revelar sua próxima carta.';
+
+  @override
+  String get cardDrawResolved => 'O universo revelou a sua carta.';
+
+  @override
+  String get cardDrawButton => 'Sortear carta';
 
   @override
   String get listSubtitle =>

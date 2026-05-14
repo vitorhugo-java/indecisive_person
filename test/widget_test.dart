@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:collection';
 import 'dart:math' as math;
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -90,6 +91,43 @@ void main() {
 
     expect(find.text('Total: 5'), findsOneWidget);
     expect(service.requests, [(2, 1, 20)]);
+  });
+
+  testWidgets('card draw screen requests a playing card from the full deck', (
+    WidgetTester tester,
+  ) async {
+    final service = _FakeRandomOrgService([
+      [52],
+    ]);
+
+    await tester.pumpWidget(
+      ProviderScope(
+        overrides: [
+          randomOrgServiceProvider.overrideWith((ref) => service),
+          githubProfileServiceProvider.overrideWith(
+            (ref) => _FakeGitHubProfileService(
+              const GitHubProfile(
+                login: 'vitorhugo-java',
+                avatarUrl: '',
+                name: 'Vitor Hugo',
+              ),
+            ),
+          ),
+          quickAccessServiceProvider.overrideWith(
+            (ref) => _FakeQuickAccessService(),
+          ),
+        ],
+        child: const UniverseDecidesApp(),
+      ),
+    );
+    await tester.tap(find.text('Cards'));
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('Draw a card'));
+    await tester.pumpAndSettle();
+
+    expect(find.text('K♠'), findsWidgets);
+    expect(find.byIcon(CupertinoIcons.suit_spade_fill), findsWidgets);
+    expect(service.requests, [(1, 1, 52)]);
   });
 
   testWidgets('list screen picks one item through the random service', (
@@ -237,6 +275,7 @@ void main() {
     await tester.pumpAndSettle();
 
     expect(find.text('Moeda'), findsWidgets);
+    expect(find.text('Cartas'), findsOneWidget);
     expect(find.text('Jogar uma moeda'), findsOneWidget);
     expect(find.text('Sobre mim'), findsOneWidget);
   });
@@ -272,6 +311,7 @@ void main() {
     await tester.pumpAndSettle();
 
     expect(find.text('Coin'), findsWidgets);
+    expect(find.text('Cards'), findsOneWidget);
     expect(find.text('Flip a coin'), findsOneWidget);
     expect(find.text('About me'), findsOneWidget);
   });

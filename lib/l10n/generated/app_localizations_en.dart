@@ -18,6 +18,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get navDice => 'Dice';
 
   @override
+  String get navCards => 'Cards';
+
+  @override
   String get navLists => 'Lists';
 
   @override
@@ -69,6 +72,22 @@ class AppLocalizationsEn extends AppLocalizations {
   String diceTotal(int total) {
     return 'Total: $total';
   }
+
+  @override
+  String get cardDrawSubtitle =>
+      'Draw a true-random playing card and let the universe reveal a modern tarot-free sign from a full 52-card deck.';
+
+  @override
+  String get cardDrawPrompt => 'Draw a card from the cosmic deck';
+
+  @override
+  String get cardDrawTapPrompt => 'Tap below to reveal your next card.';
+
+  @override
+  String get cardDrawResolved => 'The universe has revealed your card.';
+
+  @override
+  String get cardDrawButton => 'Draw a card';
 
   @override
   String get listSubtitle =>

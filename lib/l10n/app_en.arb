@@ -3,6 +3,7 @@
   "appTitle": "The Universe Decides",
   "navCoin": "Coin",
   "navDice": "Dice",
+  "navCards": "Cards",
   "navLists": "Lists",
   "navAboutMe": "About me",
   "coinSubtitle": "An enchanted coin that checks Random.org and falls back to local randomness whenever needed.",
@@ -26,6 +27,11 @@
       }
     }
   },
+  "cardDrawSubtitle": "Draw a true-random playing card and let the universe reveal a modern tarot-free sign from a full 52-card deck.",
+  "cardDrawPrompt": "Draw a card from the cosmic deck",
+  "cardDrawTapPrompt": "Tap below to reveal your next card.",
+  "cardDrawResolved": "The universe has revealed your card.",
+  "cardDrawButton": "Draw a card",
   "listSubtitle": "Write down possibilities, invite the universe, and highlight a single destination for your next decision.",
   "listAddOptionLabel": "Add option",
   "listAddOptionHint": "E.g. Travel, sleep, order pizza...",
