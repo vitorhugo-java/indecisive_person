@@ -128,6 +128,12 @@ abstract class AppLocalizations {
   /// **'Lists'**
   String get navLists;
 
+  /// No description provided for @navTarot.
+  ///
+  /// In en, this message translates to:
+  /// **'Tarot'**
+  String get navTarot;
+
   /// No description provided for @navAboutMe.
   ///
   /// In en, this message translates to:
@@ -289,6 +295,48 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Chosen by the universe'**
   String get listChosenByUniverse;
+
+  /// No description provided for @tarotSubtitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Draw a single Tarot card from the full 78-card deck and let true randomness reveal the archetype guiding this moment.'**
+  String get tarotSubtitle;
+
+  /// No description provided for @tarotPrompt.
+  ///
+  /// In en, this message translates to:
+  /// **'The deck is waiting'**
+  String get tarotPrompt;
+
+  /// No description provided for @tarotTapPrompt.
+  ///
+  /// In en, this message translates to:
+  /// **'Draw a card to reveal the universe's symbol.'**
+  String get tarotTapPrompt;
+
+  /// No description provided for @tarotButton.
+  ///
+  /// In en, this message translates to:
+  /// **'Draw a card'**
+  String get tarotButton;
+
+  /// No description provided for @tarotMajorArcana.
+  ///
+  /// In en, this message translates to:
+  /// **'Major Arcana'**
+  String get tarotMajorArcana;
+
+  /// No description provided for @tarotMinorArcana.
+  ///
+  /// In en, this message translates to:
+  /// **'Minor Arcana'**
+  String get tarotMinorArcana;
+
+  /// No description provided for @tarotDeckPosition.
+  ///
+  /// In en, this message translates to:
+  /// **'Card {number} of 78'**
+  String tarotDeckPosition(int number);
 
   /// No description provided for @aboutSubtitle.
   ///

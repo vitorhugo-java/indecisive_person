@@ -11,6 +11,7 @@ import 'package:theuniversedecides/screens/card_draw_screen.dart';
 import 'package:theuniversedecides/screens/coin_flip_screen.dart';
 import 'package:theuniversedecides/screens/dice_roll_screen.dart';
 import 'package:theuniversedecides/screens/list_picker_screen.dart';
+import 'package:theuniversedecides/screens/tarot_draw_screen.dart';
 import 'package:theuniversedecides/widgets/snack_bar_custom.dart';
 
 class MainScreen extends ConsumerStatefulWidget {
@@ -31,6 +32,7 @@ class _MainScreenState extends ConsumerState<MainScreen> {
     DiceRollScreen(),
     CardDrawScreen(),
     ListPickerScreen(),
+    TarotDrawScreen(),
     AboutMeScreen(),
   ];
 
@@ -133,6 +135,11 @@ class _MainScreenState extends ConsumerState<MainScreen> {
             icon: const Icon(Icons.auto_awesome_outlined),
             selectedIcon: const Icon(Icons.auto_awesome),
             label: l10n.navLists,
+          ),
+          NavigationDestination(
+            icon: const Icon(Icons.style_outlined),
+            selectedIcon: const Icon(Icons.style),
+            label: l10n.navTarot,
           ),
           NavigationDestination(
             icon: const Icon(Icons.person_outline),

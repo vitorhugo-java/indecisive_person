@@ -172,6 +172,43 @@ void main() {
     expect(service.requests, [(1, 0, 1)]);
   });
 
+  testWidgets('tarot screen requests one card from the 78-card deck', (
+    WidgetTester tester,
+  ) async {
+    final service = _FakeRandomOrgService([
+      [23],
+    ]);
+
+    await tester.pumpWidget(
+      ProviderScope(
+        overrides: [
+          randomOrgServiceProvider.overrideWith((ref) => service),
+          githubProfileServiceProvider.overrideWith(
+            (ref) => _FakeGitHubProfileService(
+              const GitHubProfile(
+                login: 'vitorhugo-java',
+                avatarUrl: '',
+                name: 'Vitor Hugo',
+              ),
+            ),
+          ),
+          quickAccessServiceProvider.overrideWith(
+            (ref) => _FakeQuickAccessService(),
+          ),
+        ],
+        child: const UniverseDecidesApp(),
+      ),
+    );
+    await tester.tap(find.text('Tarot'));
+    await tester.pumpAndSettle();
+    await tester.tap(find.text('Draw a card'));
+    await tester.pumpAndSettle();
+
+    expect(find.text('Ace of Wands'), findsWidgets);
+    expect(find.text('Minor Arcana'), findsWidgets);
+    expect(service.requests, [(1, 1, 78)]);
+  });
+
   testWidgets('about tab loads profile and main screen has no top bar', (
     WidgetTester tester,
   ) async {
