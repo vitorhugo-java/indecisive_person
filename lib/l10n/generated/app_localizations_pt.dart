@@ -108,7 +108,7 @@ class AppLocalizationsPt extends AppLocalizations {
       'Tirar uma carta para revelar o símbolo escolhido pelo universo.';
 
   @override
-  String get tarotButton => 'Comprar uma carta';
+  String get tarotButton => 'Tirar uma carta';
 
   @override
   String get tarotMajorArcana => 'Arcano Maior';
