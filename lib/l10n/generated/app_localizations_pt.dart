@@ -98,14 +98,14 @@ class AppLocalizationsPt extends AppLocalizations {
 
   @override
   String get tarotSubtitle =>
-      'Compre uma unica carta do baralho completo de 78 cartas e deixe a aleatoriedade real revelar o arquétipo que guia este momento.';
+      'Compre uma única carta do baralho completo de 78 cartas e deixe a aleatoriedade real revelar o arquétipo que guia este momento.';
 
   @override
   String get tarotPrompt => 'O baralho está esperando';
 
   @override
   String get tarotTapPrompt =>
-      'Compre uma carta para revelar o simbolo escolhido pelo universo.';
+      'Compre uma carta para revelar o símbolo escolhido pelo universo.';
 
   @override
   String get tarotButton => 'Comprar uma carta';
