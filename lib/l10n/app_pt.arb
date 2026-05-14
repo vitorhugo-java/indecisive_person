@@ -28,8 +28,8 @@
     }
   },
   "cardDrawSubtitle": "Sorteie uma carta com aleatoriedade real e deixe o universo revelar um sinal moderno em um baralho completo de 52 cartas.",
-  "cardDrawPrompt": "Sorteie uma carta do baralho cosmico",
-  "cardDrawTapPrompt": "Toque abaixo para revelar sua proxima carta.",
+  "cardDrawPrompt": "Sorteie uma carta do baralho cósmico",
+  "cardDrawTapPrompt": "Toque abaixo para revelar sua próxima carta.",
   "cardDrawResolved": "O universo revelou a sua carta.",
   "cardDrawButton": "Sortear carta",
   "listSubtitle": "Escreva possibilidades, convide o universo e destaque um unico destino para a sua proxima decisao.",

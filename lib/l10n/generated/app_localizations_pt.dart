@@ -78,11 +78,11 @@ class AppLocalizationsPt extends AppLocalizations {
       'Sorteie uma carta com aleatoriedade real e deixe o universo revelar um sinal moderno em um baralho completo de 52 cartas.';
 
   @override
-  String get cardDrawPrompt => 'Sorteie uma carta do baralho cosmico';
+  String get cardDrawPrompt => 'Sorteie uma carta do baralho cósmico';
 
   @override
   String get cardDrawTapPrompt =>
-      'Toque abaixo para revelar sua proxima carta.';
+      'Toque abaixo para revelar sua próxima carta.';
 
   @override
   String get cardDrawResolved => 'O universo revelou a sua carta.';
